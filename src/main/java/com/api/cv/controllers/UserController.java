@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.cv.dto.auth.loginRequestDto;
+
 import com.api.cv.dto.auth.loginResponseDto;
 import com.api.cv.dto.user.UserKeycloakInfoResponse;
 import com.api.cv.services.auth.IAuthService;

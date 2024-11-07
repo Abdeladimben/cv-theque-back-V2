@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.cv.dto.auth.loginRequestDto;
+import com.api.cv.dto.auth.LoginRequestDto;
 import com.api.cv.dto.auth.loginResponseDto;
 import com.api.cv.services.auth.IAuthService;
 
@@ -20,7 +20,7 @@ public class AuthController {
 	private final IAuthService authService;
 	
 	@PostMapping("login")
-	public ResponseEntity<loginResponseDto> login(@RequestBody loginRequestDto loginRequestDto){
+	public ResponseEntity<loginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
 		return ResponseEntity.ok(authService.login(loginRequestDto));
 		 
 	}
