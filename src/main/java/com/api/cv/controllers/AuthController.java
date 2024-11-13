@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.cv.dto.auth.LoginRequestDto;
+import com.api.cv.dto.auth.RegisterRequestDto;
 import com.api.cv.dto.auth.loginResponseDto;
 import com.api.cv.services.auth.IAuthService;
+import com.api.cv.services.auth.ISignupService;
+import com.api.cv.services.auth.SignupService;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 	
 	private final IAuthService authService;
+	private final ISignupService signupService;
 	
 	@PostMapping("login")
 	public ResponseEntity<loginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
@@ -25,10 +30,9 @@ public class AuthController {
 		 
 	}
 	
-	@PostMapping("sign-up")
-	public void signUp(){
-		
-		 
-	}
-
+	 @PostMapping("/signup")
+	    public ResponseEntity<String> signup(@RequestBody RegisterRequestDto registerRequestDto) {
+	        String result = signupService.createUser(registerRequestDto);
+	        return ResponseEntity.ok(result);
+	    }
 }

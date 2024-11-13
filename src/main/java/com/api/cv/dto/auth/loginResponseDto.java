@@ -1,4 +1,4 @@
-package com.api.cv.dto.auth;
+	package com.api.cv.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

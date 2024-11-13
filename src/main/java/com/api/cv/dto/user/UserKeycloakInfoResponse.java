@@ -1,5 +1,8 @@
 package com.api.cv.dto.user;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,22 +10,16 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Builder
 public class UserKeycloakInfoResponse {
 
-    private String userId;
-    private String username;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String sub;
-    private String email_verified;
-    private String preferred_username;
-    private String message;
+	private final String userId;
+    private final String username;
+    private final String email;
+    private final String date;
 
-    
-    public UserKeycloakInfoResponse(String message) {
-        this.message = message;
-    }
+    private final List<String> Roles;
+    private final List<String> groups;
+  
 }
