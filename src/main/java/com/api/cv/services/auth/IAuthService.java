@@ -1,10 +1,10 @@
 package com.api.cv.services.auth;
 
 import com.api.cv.dto.auth.LoginRequestDto;
-import com.api.cv.dto.auth.loginResponseDto;
+import com.api.cv.dto.auth.LoginResponseDto;
 
 public interface IAuthService {
 	
-	loginResponseDto login(LoginRequestDto loginRequestDto);
+	LoginResponseDto login(LoginRequestDto loginRequestDto);
 
 }

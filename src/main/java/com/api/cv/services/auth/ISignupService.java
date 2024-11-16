@@ -4,7 +4,6 @@ import com.api.cv.dto.auth.RegisterRequestDto;
 
 public interface ISignupService {
 	
-	public String createUser(RegisterRequestDto registerRequestDto) ;
-	public String getAdminAccessToken();
+	public void createUser(RegisterRequestDto registerRequestDto) ;
 
 }

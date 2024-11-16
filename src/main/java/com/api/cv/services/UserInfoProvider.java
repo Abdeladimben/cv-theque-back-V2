@@ -52,7 +52,11 @@ public class UserInfoProvider {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof Jwt) {
             Jwt jwt = (Jwt) authentication.getPrincipal();
-            List<String> roles = jwt.getClaimAsStringList("Roles");
+            
+            jwt.getClaims().forEach((k,v)->{
+            	System.out.println(k+" : "+v);
+            });
+            List<String> roles = jwt.getClaimAsStringList("roles");
             return roles != null ? roles : List.of();
         }
         return List.of();

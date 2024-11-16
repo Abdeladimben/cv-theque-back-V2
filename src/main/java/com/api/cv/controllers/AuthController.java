@@ -1,5 +1,7 @@
 package com.api.cv.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.cv.dto.auth.LoginRequestDto;
+import com.api.cv.dto.auth.LoginResponseDto;
 import com.api.cv.dto.auth.RegisterRequestDto;
-import com.api.cv.dto.auth.loginResponseDto;
+
 import com.api.cv.services.auth.IAuthService;
 import com.api.cv.services.auth.ISignupService;
-import com.api.cv.services.auth.SignupService;
 
 
 import lombok.RequiredArgsConstructor;
@@ -25,14 +27,13 @@ public class AuthController {
 	private final ISignupService signupService;
 	
 	@PostMapping("login")
-	public ResponseEntity<loginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
+	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
 		return ResponseEntity.ok(authService.login(loginRequestDto));
-		 
 	}
 	
 	 @PostMapping("/signup")
-	    public ResponseEntity<String> signup(@RequestBody RegisterRequestDto registerRequestDto) {
-	        String result = signupService.createUser(registerRequestDto);
-	        return ResponseEntity.ok(result);
+	    public ResponseEntity<Void> signup(@RequestBody RegisterRequestDto registerRequestDto) {
+	        signupService.createUser(registerRequestDto);
+	        return new ResponseEntity<>(HttpStatus.CREATED);
 	    }
 }
