@@ -1,25 +1,27 @@
 package com.api.cv.entities;
 
+import java.io.Serial;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Table(name = "cv_role")
-public class Role {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private Long id;
+@Entity
+@Table(name = "api_role")
+public class Role extends BaseModel{
 	
-	@Column(name = "name",nullable = false,unique = true)
-	private String name;
+	/**
+	 * 
+	 */
+	@Serial
+	private static final long serialVersionUID = 8009510240735873447L;
+	
+	@Column(name = "label",nullable = false,unique = true)
+	private String label;
 }

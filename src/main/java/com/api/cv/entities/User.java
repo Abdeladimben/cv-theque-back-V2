@@ -1,25 +1,28 @@
 package com.api.cv.entities;
 
+import java.io.Serial;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
+
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Table(name = "cv_user")
-public class User {
+@Entity
+@Table(name = "api_user")
+public class User extends BaseModel{
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private Long id;
-	
+	/**
+	 * 
+	 */
+	@Serial
+	private static final long serialVersionUID = -3995172752479386599L;
+
 	@Column(name = "user_name",nullable = false,unique = true)
 	private String userName;
 	
@@ -28,5 +31,6 @@ public class User {
 	
 	@Column(name = "keycloak_id",nullable = false,unique = true)
 	private String keycloakId;
+	
 	
 }
