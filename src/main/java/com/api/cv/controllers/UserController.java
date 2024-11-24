@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping("/info")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<UserKeycloakInfoResponse> getUserInfo() {
-        String userId = userInfoProvider.getUserId();
+      
         String username = userInfoProvider.getUsername();
         String email = userInfoProvider.getEmail();
         String Date =userInfoProvider.getDate();
@@ -32,7 +32,7 @@ public class UserController {
 
   
         UserKeycloakInfoResponse userInfoResponse = UserKeycloakInfoResponse.builder()
-                .userId(userId)
+           
                 .username(username)
                 .email(email)
                 .date(Date)

@@ -12,7 +12,7 @@ import lombok.Data;
 @Builder
 public class UserKeycloakInfoResponse {
 
-	private final String userId;
+
     private final String username;
     private final String email;
     private final String date;

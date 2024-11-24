@@ -1,12 +1,13 @@
 package com.api.cv.config;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 public class RedirectionController {
 	
-	@RequestMapping("")
+	 @GetMapping("")
 	public String redirect() {
 		return "redirect:swagger-ui/index.html";
 	}
