@@ -7,8 +7,11 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class RestTemplateConfig {
 
-	@Bean
-	RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        // Register the custom logging interceptor
+        restTemplate.getInterceptors().add(new LoggingRequestInterceptor());
+        return restTemplate;
+    }
 }

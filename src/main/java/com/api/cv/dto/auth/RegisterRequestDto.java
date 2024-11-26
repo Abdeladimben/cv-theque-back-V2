@@ -1,4 +1,4 @@
-package com.api.cv.dto.user;
+package com.api.cv.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserResponseDto {
-
-	private String userName;
+public class RegisterRequestDto {
 	
+	private String username;
 	private String email;
+	private String password;
+	private String roleName;
+
 }

@@ -1,20 +1,23 @@
 package com.api.cv.dto.user;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Builder
 public class UserKeycloakInfoResponse {
 
-    private String userId;
-    private String username;
-    private String email;
-    private String firstName;
-    private String lastName;
-    
+
+    private final String username;
+    private final String email;
+    private final String date;
+
+    private final List<String> Roles;
+    private final List<String> groups;
+  
 }

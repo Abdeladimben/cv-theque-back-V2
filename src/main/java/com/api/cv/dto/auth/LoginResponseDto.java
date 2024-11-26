@@ -1,4 +1,4 @@
-package com.api.cv.dto.auth;
+	package com.api.cv.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class loginResponseDto {
+public class LoginResponseDto {
 
     private String access_token;
     private String refresh_token;
