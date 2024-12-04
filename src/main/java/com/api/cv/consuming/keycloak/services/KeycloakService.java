@@ -75,13 +75,13 @@ public class KeycloakService implements IKeycloakService{
         user.put("email", registerRequestDto.getEmail());
         user.put("enabled", true);
 
-        // Credentials should be a list of maps
+   
         Map<String, Object> credentials = new HashMap<>();
         credentials.put("type", "password");
         credentials.put("value", registerRequestDto.getPassword());
-        credentials.put("temporary", false);  // As boolean, not string
+        credentials.put("temporary", false);  
 
-        // Add credentials as a list
+       
         user.put("credentials", List.of(credentials));
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(user, headers);
@@ -89,7 +89,7 @@ public class KeycloakService implements IKeycloakService{
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            // Step 2: Get User ID and Assign Role
+           
             String userId = getUserIdByUsername( registerRequestDto.getUsername(), token);
             if (userId != null) {
                 boolean roleAssigned = assignRoleToUser(userId,  registerRequestDto.getRoleName(), token);

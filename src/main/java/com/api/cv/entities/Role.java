@@ -24,4 +24,5 @@ public class Role extends BaseModel{
 	
 	@Column(name = "label",nullable = false,unique = true)
 	private String label;
+	
 }
