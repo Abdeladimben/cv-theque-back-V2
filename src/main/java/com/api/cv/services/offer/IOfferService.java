@@ -2,17 +2,23 @@ package com.api.cv.services.offer;
 
 import java.util.List;
 
-import com.api.cv.dto.OfferDto;
+import com.api.cv.dto.offer.OfferRequestDto;
+import com.api.cv.dto.offer.OfferResponseDto;
+import com.api.cv.dto.offer.OfferUpdateRequestDto;
+import com.api.cv.exceptions.ApiErrorException;
 
 
 public interface IOfferService {
 	
-	OfferDto create(OfferDto offerDto);
+	List<OfferResponseDto> getAll();
 	
-	OfferDto update(OfferDto offerDto);
+	OfferResponseDto getByUuid(String uuid);
 	
-	void delete(Long id);
+	OfferResponseDto create(OfferRequestDto offerDto) throws ApiErrorException;
 	
-	List<OfferDto> select();
+	OfferResponseDto update(OfferUpdateRequestDto offerDto);
+	
+	void delete(String uuid);
+
 
 }

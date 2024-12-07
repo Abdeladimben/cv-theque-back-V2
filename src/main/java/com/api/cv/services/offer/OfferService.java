@@ -2,64 +2,62 @@ package com.api.cv.services.offer;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.api.cv.dto.OfferDto;
-
-import com.api.cv.mappers.OfferMapper;
+import com.api.cv.dto.offer.OfferRequestDto;
+import com.api.cv.dto.offer.OfferResponseDto;
+import com.api.cv.dto.offer.OfferUpdateRequestDto;
+import com.api.cv.entities.Offer;
+import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.mappers.offer.OfferMapper;
+import com.api.cv.mappers.offer.IOfferMapperCustomizer;
 import com.api.cv.repositories.OfferRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
-
 public class OfferService implements IOfferService {
 
-	
-
-	private final OfferRepository repo;
+	private final OfferRepository offerRepository;
 	
 	private final OfferMapper offerMapper;
 	
+	private final IOfferMapperCustomizer offerMapperCustomizer;
 	
-
+	@Override
+	public OfferResponseDto create(OfferRequestDto offerDto) throws ApiErrorException {
+		log.debug("creation service {}",offerDto);
 	
-	
-	public OfferService(OfferRepository repo, OfferMapper offerMapper) {
-		
-		this.repo = repo;
-		this.offerMapper = offerMapper;
+		return offerMapper.EntityToDto(offerRepository.save(offerMapperCustomizer.DtoToEntity(offerDto)));
 	}
 
 	@Override
-	public OfferDto create(OfferDto offerDto) {
-		
-	System.out.println("creation service");
-		
-		
-		return offerMapper.EntityToDto(repo.save(offerMapper.DtoToEntity(offerDto)));
+	public List<OfferResponseDto> getAll() {
+		return offerMapper.ListEntityToListDto(offerRepository.findAll());
 	}
-	
-	
-	
+
 	@Override
-	public OfferDto update(OfferDto offerDto) {
+	public OfferResponseDto getByUuid(String uuid) {
+		
+	
+		return offerMapper.EntityToDto(offerRepository.findByUuid(uuid));
+	}
+
+	@Override
+	public OfferResponseDto update(OfferUpdateRequestDto offerDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(String uuid) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
-	@Override
-	public List<OfferDto> select() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

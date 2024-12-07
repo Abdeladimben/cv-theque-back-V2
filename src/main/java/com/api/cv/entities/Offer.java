@@ -26,15 +26,10 @@ public class Offer extends BaseModel{
 
 	@Column(name = "title",nullable = false)
 	private String title;
-	@Column(name = "description",nullable = false)
-	private String description;
 	
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) 
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
     @JoinColumn(name = "created_user", nullable = false) 
     private User createdUser;
-    
-  
 	
 	@Column(name = "status",nullable = false)
 	private String status;
