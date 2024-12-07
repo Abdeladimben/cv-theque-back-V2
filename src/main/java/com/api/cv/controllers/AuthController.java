@@ -17,11 +17,10 @@ import com.api.cv.services.auth.ISignupService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
 @RestController
-@RequestMapping("auth")
+@RequestMapping("${endpoint.prefix}auth")
 @RequiredArgsConstructor
 public class AuthController {
 	
@@ -30,48 +29,31 @@ public class AuthController {
 	
   
 	@Operation(
-	        summary = "Login endpoint",
-	        description = "Accepts username and password, and returns an access token.",
-	        tags = {"Authentication"}
-	    )
-	    @ApiResponse(
-	        responseCode = "200",
-	        description = "Login successful",
-	        content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponseDto.class))
-	    )
-	    @ApiResponse(responseCode = "400", description = "Invalid username or password")
-	    @ApiResponse(responseCode = "500", description = "Internal server error")
-	 
-	 
-	 
-	 	
+        summary = "Login endpoint",
+        description = "Accepts username and password, and returns an access token.",
+        tags = {"Authentication"}
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Login successful",
+        content = @Content(mediaType = "application/json",
+        schema = @Schema(implementation = LoginResponseDto.class))
+    )
+    @ApiResponse(responseCode = "400", description = "Invalid username or password")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
 	@PostMapping("login")
-	public ResponseEntity<LoginResponseDto> login(
-	@RequestBody LoginRequestDto loginRequestDto){
+	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
 		return ResponseEntity.ok(authService.login(loginRequestDto));
 	}
 	
-	
-	
-	
-	
-	@Operation(
-			summary="Sign up endpoint",
-			description="create a user with the infos provided"
-			)
-	@ApiResponse(
-			responseCode = "200",
-			description="user created successfully"
-			
-			)
-	
-	 @ApiResponse(responseCode = "400", description = "Invalid infos ")
-    @ApiResponse(responseCode = "500", description = "Internal server error")
- 
-			
-	 @PostMapping("/signup")
-	    public ResponseEntity<Void> signup(@RequestBody RegisterRequestDto registerRequestDto) {
-	        signupService.createUser(registerRequestDto);
-	        return new ResponseEntity<>(HttpStatus.CREATED);
-	    }
+
+	@Operation(summary="Sign up endpoint",description="create a user with the infos provided")
+	@ApiResponse(responseCode = "200",description="user created successfully")
+	@ApiResponse(responseCode = "400", description = "Invalid infos ")
+	@ApiResponse(responseCode = "500", description = "Internal server error")
+	@PostMapping("/signup")
+    public ResponseEntity<Void> signup(@RequestBody RegisterRequestDto registerRequestDto) {
+        signupService.createUser(registerRequestDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
