@@ -11,7 +11,6 @@ import com.api.cv.dto.user.UserKeycloakInfoResponse;
 import com.api.cv.entities.User;
 import com.api.cv.enums.ErrorCode;
 import com.api.cv.exceptions.ApiErrorException;
-import com.api.cv.exceptions.FunctionalException;
 import com.api.cv.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,10 @@
 package com.api.cv.exceptions;
 
-public class TechnicalException extends Exception {
+import com.api.cv.enums.ErrorCode;
 
+public class TechnicalException extends ApiErrorException{
+
+    public TechnicalException(ErrorCode errorCode) {
+        super(errorCode);
+    }
 }
