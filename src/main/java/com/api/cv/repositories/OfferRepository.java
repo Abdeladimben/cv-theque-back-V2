@@ -12,4 +12,5 @@ import com.api.cv.entities.Offer;
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Long>{
 	  Offer findByUuid(String uuid);
+	  void deleteByUuid(String uuid);
 }

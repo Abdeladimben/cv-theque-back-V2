@@ -27,7 +27,7 @@ public class Offer extends BaseModel{
 	@Column(name = "title",nullable = false)
 	private String title;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
+	@ManyToOne(fetch = FetchType.LAZY) 
     @JoinColumn(name = "created_user", nullable = false) 
     private User createdUser;
 	

@@ -37,13 +37,13 @@ public class OfferController {
 	@GetMapping()
 	public List<OfferResponseDto> getAll() throws ApiErrorException {
 		LOG.debug("request GETALL OfferDto");
-		return null;
+		return offerService.getAll();
 	}
 	
 	@GetMapping("{uuid}")	
 	public OfferResponseDto getByUuid(@PathVariable String uuid) throws ApiErrorException {
 		LOG.debug("request get by uuid{}",uuid);
-		return null;
+		return offerService.getByUuid(uuid);
 	}
 	
 	@PostMapping()	
@@ -55,13 +55,13 @@ public class OfferController {
 	@PutMapping()	
 	public OfferResponseDto update(@RequestBody OfferUpdateRequestDto offerUpdateRequestDto ) throws ApiErrorException {
 		LOG.debug("request creation offerUpdateRequestDto{}",offerUpdateRequestDto);
-		return null;
+		return offerService.update(offerUpdateRequestDto);
 	}
 	
 	@DeleteMapping("{uuid}")	
-	public OfferResponseDto delete(@PathVariable String uuid) throws ApiErrorException {
+	public void delete(@PathVariable String uuid) throws ApiErrorException {
 		LOG.debug("request delete uuid{}",uuid);
-		return null;
+			offerService.delete(uuid);
 	}
 	
 }

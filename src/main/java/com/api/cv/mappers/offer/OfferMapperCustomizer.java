@@ -3,6 +3,7 @@ package com.api.cv.mappers.offer;
 import org.springframework.stereotype.Component;
 
 import com.api.cv.dto.offer.OfferRequestDto;
+import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.entities.Offer;
 import com.api.cv.exceptions.ApiErrorException;
 import com.api.cv.services.user.UserService;
@@ -25,5 +26,7 @@ public class OfferMapperCustomizer implements IOfferMapperCustomizer{
 		offer.setStatus("ACTIVE");
 		return offer;
 	}
+
+
 
 }

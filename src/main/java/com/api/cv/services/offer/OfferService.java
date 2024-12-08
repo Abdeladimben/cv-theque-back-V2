@@ -13,6 +13,7 @@ import com.api.cv.mappers.offer.OfferMapper;
 import com.api.cv.mappers.offer.IOfferMapperCustomizer;
 import com.api.cv.repositories.OfferRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,12 +50,15 @@ public class OfferService implements IOfferService {
 	@Override
 	public OfferResponseDto update(OfferUpdateRequestDto offerDto) {
 		// TODO Auto-generated method stub
-		return null;
+		return offerMapper.EntityToDto(offerRepository.save(offerMapper.updateDtoToEntity(offerDto)));
+
 	}
 
 	@Override
+    @Transactional
 	public void delete(String uuid) {
-		// TODO Auto-generated method stub
+
+		offerRepository.deleteByUuid(uuid);
 		
 	}
 	
