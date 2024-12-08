@@ -39,6 +39,7 @@ public class UserController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @GetMapping("/info")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<UserKeycloakInfoResponse> getUserInfo() {
         UserKeycloakInfoResponse userInfoResponse = userService.getUserInfo();
         return ResponseEntity.ok(userInfoResponse);
