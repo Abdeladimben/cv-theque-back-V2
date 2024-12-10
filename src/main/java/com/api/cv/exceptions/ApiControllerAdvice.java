@@ -24,7 +24,7 @@ public class ApiControllerAdvice {
 	}
 
 	@ExceptionHandler({ MethodArgumentNotValidException.class })
-	public ResponseEntity<Object> handle(MethodArgumentNotValidException e) {
+	public ResponseEntity<ApiError> handle(MethodArgumentNotValidException e) {
 
 		exceptionHandlerLoggerImpl.handle(e);
 
@@ -43,10 +43,10 @@ public class ApiControllerAdvice {
 	}
 
 	@ExceptionHandler({ Exception.class })
-	public ResponseEntity<Object> handle(Exception e) {
+	public ResponseEntity<ApiError> handle(Exception e) {
 		exceptionHandlerLoggerImpl.handle(e);
 		ErrorCode code = ErrorCode.A500;
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError(code, code.toString()));
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError(code, code.getValue()));
 	}
 
 }

@@ -3,7 +3,9 @@ package com.api.cv.exceptions;
 import java.util.Date;
 
 import com.api.cv.enums.ErrorCode;
+import lombok.Data;
 
+@Data
 public class ApiError {
 
 	private ErrorCode errorCode;
@@ -13,7 +15,7 @@ public class ApiError {
 	
 	public ApiError(ErrorCode errorCode) {
 		this.errorCode = errorCode;
-		this.message = errorCode.toString();
+		this.message = errorCode.getValue();
 	}
 	
 	public ApiError(ErrorCode errorCode,String message) {
