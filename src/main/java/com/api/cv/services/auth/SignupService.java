@@ -23,26 +23,16 @@ public class SignupService implements ISignupService {
 	@Override
 	public void createUser(RegisterRequestDto registerRequestDto) {
 		
-		
-		
-        Optional<User> userOptional = userRepository.findByUserName(registerRequestDto.getUsername());
-        if (userOptional.isPresent()) {
-            throw new IllegalArgumentException(" deja exists");
-        }
-
-        keycloakService.Signup(registerRequestDto);	
-        
-
-        
-        User user = new User();
-        user.setUserName(registerRequestDto.getUsername());
-        user.setEmail(registerRequestDto.getEmail());
-        user.setCode(registerRequestDto.getPassword()); 
-      
-        userRepository.save(user);
+	Optional<User> userOptional = userRepository.findByUserName(registerRequestDto.getUsername());
+    if (userOptional.isPresent()) {
+        throw new IllegalArgumentException(" deja exists");
     }
-		
-
-
     
+    keycloakService.Signup(registerRequestDto);
+    User user = new User();
+    user.setUserName(registerRequestDto.getUsername());
+    user.setEmail(registerRequestDto.getEmail());
+    userRepository.save(user);
+}
+
 }

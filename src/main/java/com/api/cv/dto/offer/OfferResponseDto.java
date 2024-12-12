@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Schema(name="OfferResponseDto",description = "Response payload for Offer")
 public class OfferResponseDto {
 	
-	@Schema(description = "uuid of the offer", example = "-fe-fez-rè-ezf-è", required = true)
+	@Schema(description = "uuid of the offer", example = "eerrff55g4g5g5g...", required = true)
 	private String uuid;
 	
 	@Schema(description = "title of the offer", example = "Software Engineer", required = true)

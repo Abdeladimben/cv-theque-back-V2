@@ -107,15 +107,6 @@ public class KeycloakService implements IKeycloakService{
     	 System.out.println("Error creating user: " + e.getResponseBodyAsString());
     }
 		
-		
-		
-		
-		
-		
-		
-		
-		//okkk
-		
 	}
 
 	@Override

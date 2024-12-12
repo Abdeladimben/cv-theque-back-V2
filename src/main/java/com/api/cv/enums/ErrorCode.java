@@ -4,7 +4,8 @@ import lombok.Data;
 
 public enum ErrorCode {
 	
-	A500("ERROR SYSTEM");
+	A500("ERROR SYSTEM"),
+	A400 ("BAD REQUEST");
 
 	String value;
 	

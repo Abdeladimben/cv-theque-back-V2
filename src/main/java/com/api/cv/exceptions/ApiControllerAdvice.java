@@ -39,7 +39,7 @@ public class ApiControllerAdvice {
 			str.append(" [" + error.getObjectName() + ": " + error.getDefaultMessage() + "]");
 		}
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(ErrorCode.A500, str.toString()));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(ErrorCode.A400, str.toString()));
 	}
 
 	@ExceptionHandler({ Exception.class })
@@ -49,4 +49,15 @@ public class ApiControllerAdvice {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError(code, code.getValue()));
 	}
 
+	
+	@ExceptionHandler({ RessourceDbNotFound.class })
+	public ResponseEntity<Object> handle(RessourceDbNotFound e) {
+		exceptionHandlerLoggerImpl.handle(e);
+		ErrorCode code = ErrorCode.A400;
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(code, code.toString()));
+	}
+
+
+
+	
 }

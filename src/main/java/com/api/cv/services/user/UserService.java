@@ -1,6 +1,8 @@
 package com.api.cv.services.user;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,7 +28,7 @@ public class UserService {
     }
 
     public String getUsername(Jwt jwt) {
-    	if(jwt!=null) {
+    	if(jwt != null) {
             return jwt.getClaimAsString("preferred_username");
     	} else {
     		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,8 +45,15 @@ public class UserService {
     }
 
     public List<String> getRoles(Jwt jwt) {
-        List<String> roles = jwt.getClaimAsStringList("roles");
-        return roles != null ? roles : List.of();
+        if (jwt == null) {
+            return List.of();
+        }
+
+        // Extract roles for a specific client (e.g., "cv-bff")
+        Map<String, Object> resourceAccess = jwt.getClaimAsMap("resource_access");
+        return resourceAccess != null && resourceAccess.containsKey("cv-bff")
+            ? (List<String>) ((Map<String, Object>) resourceAccess.get("cv-bff")).get("roles")
+            : List.of();
     }
 
     public List<String> getGroups(Jwt jwt) {
@@ -77,6 +86,6 @@ public class UserService {
     
     public User getUserConnected() throws ApiErrorException {
     	return userRepository.findByUserName(getUsername(null))
-    			.orElseThrow(()->new ApiErrorException(ErrorCode.A500));
+    			.orElseThrow(() -> new ApiErrorException(ErrorCode.A500));
     }
 }
