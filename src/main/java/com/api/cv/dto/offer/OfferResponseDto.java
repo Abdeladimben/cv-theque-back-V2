@@ -26,5 +26,9 @@ public class OfferResponseDto {
     private UserDto createdUser; 
 
 	@Schema(description = " the status of the offer", example="Active", required = true)	
-    private String status;
+    private OfferStatusDto offerStatusDto;
+	
+	@Schema(description = " the status of the offer", example="Active", required = true)	
+    private ContractTypeDto contractTypeDto;
+	
 }

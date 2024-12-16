@@ -33,16 +33,16 @@ public class Offer extends BaseModel{
 	@Column(name = "title",nullable = false)
 	private String title;
 
-	@Column(name="post",nullable=false)
+	@Column(name="post")
 	private String post;
 	
-	@Column(name="ville",nullable=false)
+	@Column(name="ville")
 	private String ville;
 	
-	@Column(name="remuneration",nullable=false)
+	@Column(name="remuneration")
 	private double remuneration;
 	
-	@Column(name="duree_contrat",nullable=false)
+	@Column(name="duree_contrat")
 	private int dureeContrat;
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
@@ -50,11 +50,11 @@ public class Offer extends BaseModel{
     private User createdUser;
 	
 	@ManyToOne
-	@Column(name = "offer_status",nullable = false)
+	@JoinColumn(name = "offer_status", nullable = false)
 	private OfferStatus offerStatus;
 	
 	@ManyToOne
-	@Column(name = "contract_type",nullable = false)
+	@JoinColumn(name = "contract_type", nullable = false)
 	private ContractType contractType;
 	
 }

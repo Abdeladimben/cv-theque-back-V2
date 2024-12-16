@@ -22,7 +22,7 @@ public class OfferStatus extends BaseModel {
 	@Serial
 	private static final long serialVersionUID = -7898756852479386599L;
 	
-	@Column(name="libelle",nullable=false)
+	@Column(name="libelle")
 	private String libelle;
 	
 }
