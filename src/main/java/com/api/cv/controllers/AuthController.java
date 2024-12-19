@@ -17,11 +17,13 @@ import com.api.cv.services.auth.ISignupService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
 @RestController
 @RequestMapping("${endpoint.prefix}auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication Controller", description = "APIs - LOGIN | SIGNUP")
 public class AuthController {
 	
 	private final IAuthService authService;
@@ -30,8 +32,8 @@ public class AuthController {
   
 	@Operation(
         summary = "Login endpoint",
-        description = "Accepts username and password, and returns an access token.",
-        tags = {"Authentication"}
+        description = "Accepts username and password, and returns an access token."
+     
     )
     @ApiResponse(
         responseCode = "200",

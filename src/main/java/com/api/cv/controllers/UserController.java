@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -20,6 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @RestController
 @RequestMapping("${endpoint.prefix}user")
 @RequiredArgsConstructor
+@Tag(name = "USER Controller", description = "APIs - USER INFORMATION")
 public class UserController {
 
     private final UserService userService;
