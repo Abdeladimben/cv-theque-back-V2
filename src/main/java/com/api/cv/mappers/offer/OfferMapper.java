@@ -10,9 +10,9 @@ import com.api.cv.dto.offer.OfferRequestDto;
 import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.entities.offer.Offer;
-import com.api.cv.helpers.StatusMapperHelper;
+import com.api.cv.mappers.offer.helpers.OfferMapperHelper;
 
-@Mapper(componentModel = "spring", uses = {StatusMapperHelper.class})
+@Mapper(componentModel = "spring", uses = {OfferMapperHelper.class})
 
 public interface OfferMapper{
 	
