@@ -50,8 +50,8 @@ public class ApiControllerAdvice {
 	}
 
 	
-	@ExceptionHandler({ RessourceDbNotFound.class })
-	public ResponseEntity<Object> handle(RessourceDbNotFound e) {
+	@ExceptionHandler({ RessourceDbNotFoundException.class })
+	public ResponseEntity<Object> handle(RessourceDbNotFoundException e) {
 		exceptionHandlerLoggerImpl.handle(e);
 		ErrorCode code = ErrorCode.A400;
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(code, code.toString()));
