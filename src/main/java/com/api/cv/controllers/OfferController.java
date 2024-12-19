@@ -22,11 +22,13 @@ import com.api.cv.services.offer.IOfferService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("${endpoint.prefix}offers")
+@Tag(name = "Offer Controller", description = "APIs - GET ALL | SEARCH | GET BY UUID | CREATE | UPDATE | DELETE")
 public class OfferController {
 
 	private final IOfferService offerService;
