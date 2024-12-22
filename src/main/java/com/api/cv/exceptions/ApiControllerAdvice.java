@@ -53,11 +53,23 @@ public class ApiControllerAdvice {
 	@ExceptionHandler({ RessourceDbNotFoundException.class })
 	public ResponseEntity<Object> handle(RessourceDbNotFoundException e) {
 		exceptionHandlerLoggerImpl.handle(e);
-		ErrorCode code = ErrorCode.A400;
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(code, code.toString()));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(e.getErrorCode()));
+	}
+
+	@ExceptionHandler({ UserNotConnectedException.class })
+	public ResponseEntity<Object> handle(UserNotConnectedException e) {
+		exceptionHandlerLoggerImpl.handle(e);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(e.getErrorCode()));
+	}
+
+	@ExceptionHandler({ RessourceAlreadyExistException.class })
+	public ResponseEntity<Object> handle(RessourceAlreadyExistException e) {
+		exceptionHandlerLoggerImpl.handle(e);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(e.getErrorCode()));
 	}
 
 
-
+	
+	
 	
 }

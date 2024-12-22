@@ -1,11 +1,11 @@
 package com.api.cv.controllers;
 
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.cv.dto.ResponseWrapper;
 import com.api.cv.dto.user.UserKeycloakInfoResponse;
 import com.api.cv.services.user.UserService;
 
@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
-
 
 @RestController
 @RequestMapping("${endpoint.prefix}user")
@@ -32,8 +31,8 @@ public class UserController {
         security = @SecurityRequirement(name = "bearerAuth")
     )
     @ApiResponse(
-    	responseCode = "200",
-    	description = "Successful response", 
+        responseCode = "200",
+        description = "Successful response",
         content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = UserKeycloakInfoResponse.class)
         )
@@ -43,7 +42,9 @@ public class UserController {
     @GetMapping("/info")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<UserKeycloakInfoResponse> getUserInfo() {
+      
         UserKeycloakInfoResponse userInfoResponse = userService.getUserInfo();
+
         return ResponseEntity.ok(userInfoResponse);
     }
 }

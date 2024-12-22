@@ -7,6 +7,10 @@ import com.api.cv.consuming.keycloak.services.IKeycloakService;
 import com.api.cv.dto.auth.LoginRequestDto;
 import com.api.cv.dto.auth.LoginResponseDto;
 import com.api.cv.entities.User;
+import com.api.cv.enums.ErrorCode;
+import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.RessourceAlreadyExistException;
+import com.api.cv.exceptions.RessourceDbNotFoundException;
 import com.api.cv.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +25,7 @@ public class AuthService implements IAuthService{
     private final UserRepository userRepository;
 
 	@Override
-	public LoginResponseDto login(LoginRequestDto loginRequestDto) {
+	public LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException,RessourceAlreadyExistException {
 		
 	    Optional<User> userOptional = userRepository.findByUserName(loginRequestDto.getUsername());
 
@@ -31,7 +35,7 @@ public class AuthService implements IAuthService{
 	        return keycloakService.login(loginRequestDto);
 	    } else {
 	        
-	        return new LoginResponseDto("User not found", null, null, null, null);
+	        throw new RessourceDbNotFoundException(ErrorCode.AU002);
 	    }
 	}
 
