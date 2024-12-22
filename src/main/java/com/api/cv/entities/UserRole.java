@@ -2,6 +2,8 @@ package com.api.cv.entities;
 
 import java.io.Serial;
 
+import org.hibernate.annotations.Where;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "api_rel_user_role")
+@Where(clause = "is_delete = false")
 public class UserRole extends BaseModel{
 
 	/**

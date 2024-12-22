@@ -2,6 +2,8 @@ package com.api.cv.entities;
 
 import java.io.Serial;
 
+import org.hibernate.annotations.Where;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "api_role")
+@Where(clause = "is_delete = false")
 public class Role extends BaseModel{
 	
 	/**
@@ -24,4 +27,5 @@ public class Role extends BaseModel{
 	
 	@Column(name = "label",nullable = false,unique = true)
 	private String label;
+	
 }
