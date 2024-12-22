@@ -32,15 +32,12 @@ public class OfferService implements IOfferService {
     private final UserService userService;
 
     @Override
-    public OfferResponseDto create(OfferRequestDto offerDto) throws ApiErrorException {
+    public OfferResponseDto create(OfferRequestDto offerDto) throws ApiErrorException, RessourceDbNotFoundException {
         log.debug("creation service {}", offerDto);
         
         // Map OfferRequestDto to Offer
         Offer offer = offerMapper.DtoToEntity(offerDto);
-        
-        // Set the created user using OfferMapperHelper
-        offerMapperHelper.setCreatedUser(offer);
-        
+
         // Save and return the mapped OfferResponseDto
         return offerMapper.EntityToDto(offerRepository.save(offer));
     }
