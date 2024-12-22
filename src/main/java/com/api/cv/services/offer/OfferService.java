@@ -59,7 +59,7 @@ public class OfferService implements IOfferService {
 
     @Override
     @Transactional
-    public OfferResponseDto update(OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException {
+    public OfferResponseDto update(OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException, UserNotConnectedException, RessourceDbNotFoundException {
         Offer offer = offerRepository.findByUuid(offerUpdateRequestDto.getUuid())
                 .orElseThrow(() -> new RessourceDbNotFoundException(ErrorCode.A400));
 

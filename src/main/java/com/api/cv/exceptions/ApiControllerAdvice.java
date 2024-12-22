@@ -23,6 +23,18 @@ public class ApiControllerAdvice {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError(ex.getErrorCode()));
 	}
 
+	@ExceptionHandler({BadRequestException.class})
+	public ResponseEntity<ApiError> handle(BadRequestException ex) {
+		exceptionHandlerLoggerImpl.handle(ex);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(ex.getErrorCode()));
+	}
+
+	@ExceptionHandler({ForbiddenException.class})
+	public ResponseEntity<ApiError> handle(ForbiddenException ex) {
+		exceptionHandlerLoggerImpl.handle(ex);
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiError(ex.getErrorCode()));
+	}
+
 	@ExceptionHandler({ MethodArgumentNotValidException.class })
 	public ResponseEntity<ApiError> handle(MethodArgumentNotValidException e) {
 
@@ -48,28 +60,5 @@ public class ApiControllerAdvice {
 		ErrorCode code = ErrorCode.A500;
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError(code, code.getValue()));
 	}
-
-	
-	@ExceptionHandler({ RessourceDbNotFoundException.class })
-	public ResponseEntity<Object> handle(RessourceDbNotFoundException e) {
-		exceptionHandlerLoggerImpl.handle(e);
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(e.getErrorCode()));
-	}
-
-	@ExceptionHandler({ UserNotConnectedException.class })
-	public ResponseEntity<Object> handle(UserNotConnectedException e) {
-		exceptionHandlerLoggerImpl.handle(e);
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(e.getErrorCode()));
-	}
-
-	@ExceptionHandler({ RessourceAlreadyExistException.class })
-	public ResponseEntity<Object> handle(RessourceAlreadyExistException e) {
-		exceptionHandlerLoggerImpl.handle(e);
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(e.getErrorCode()));
-	}
-
-
-	
-	
 	
 }

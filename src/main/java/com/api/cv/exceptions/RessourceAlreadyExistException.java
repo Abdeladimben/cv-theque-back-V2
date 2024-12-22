@@ -2,13 +2,10 @@ package com.api.cv.exceptions;
 
 import com.api.cv.enums.ErrorCode;
 
-public class RessourceAlreadyExistException extends ApiErrorException {
+public class RessourceAlreadyExistException extends BadRequestException {
 
 	public RessourceAlreadyExistException(ErrorCode errorCode) {
 		super(errorCode);
-		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 }

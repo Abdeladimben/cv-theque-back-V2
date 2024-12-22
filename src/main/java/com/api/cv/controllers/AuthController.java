@@ -1,5 +1,7 @@
 package com.api.cv.controllers;
 
+import com.api.cv.enums.ErrorCode;
+import com.api.cv.exceptions.*;
 import io.swagger.v3.oas.annotations.media.Content;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.cv.dto.auth.LoginRequestDto;
 import com.api.cv.dto.auth.LoginResponseDto;
 import com.api.cv.dto.auth.RegisterRequestDto;
-import com.api.cv.exceptions.ApiErrorException;
 import com.api.cv.services.auth.IAuthService;
 import com.api.cv.services.auth.ISignupService;
 
@@ -44,7 +45,7 @@ public class AuthController {
     @ApiResponse(responseCode = "400", description = "Invalid username or password")
     @ApiResponse(responseCode = "500", description = "Internal server error")
 	@PostMapping("login")
-	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) throws ApiErrorException{
+	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) throws ApiErrorException, RessourceDbNotFoundException {
 		return ResponseEntity.ok(authService.login(loginRequestDto));
 	}
 	
@@ -54,7 +55,7 @@ public class AuthController {
 	@ApiResponse(responseCode = "400", description = "Invalid infos ")
 	@ApiResponse(responseCode = "500", description = "Internal server error")
 	@PostMapping("/signup")
-    public ResponseEntity<Void> signup(@RequestBody RegisterRequestDto registerRequestDto) throws ApiErrorException {
+    public ResponseEntity<Void> signup(@RequestBody RegisterRequestDto registerRequestDto) throws ApiErrorException, RessourceAlreadyExistException {
         signupService.createUser(registerRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

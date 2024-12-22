@@ -2,6 +2,8 @@ package com.api.cv.controllers;
 
 import java.util.List;
 
+import com.api.cv.exceptions.RessourceDbNotFoundException;
+import com.api.cv.exceptions.UserNotConnectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +53,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @GetMapping("{uuid}")
-    public ResponseEntity<OfferResponseDto> getByUuid(@PathVariable String uuid) throws ApiErrorException {
+    public ResponseEntity<OfferResponseDto> getByUuid(@PathVariable String uuid) throws RessourceDbNotFoundException {
         LOG.debug("Request to GET offer by UUID: {}", uuid);
         return ResponseEntity.ok(offerService.getByUuid(uuid));
     }
@@ -72,7 +74,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @PutMapping()
-    public ResponseEntity<OfferResponseDto> update(@RequestBody OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException {
+    public ResponseEntity<OfferResponseDto> update(@RequestBody OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException, UserNotConnectedException, RessourceDbNotFoundException {
         LOG.debug("Request to UPDATE offer: {}", offerUpdateRequestDto);
         OfferResponseDto updatedOffer = offerService.update(offerUpdateRequestDto);
         return ResponseEntity.ok(updatedOffer);
@@ -83,7 +85,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Invalid UUID")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @DeleteMapping("{uuid}")
-    public ResponseEntity<Void> delete(@PathVariable String uuid) throws ApiErrorException {
+    public ResponseEntity<Void> delete(@PathVariable String uuid) throws RessourceDbNotFoundException {
         LOG.debug("Request to DELETE offer by UUID: {}", uuid);
         offerService.delete(uuid);
         return ResponseEntity.noContent().build();
