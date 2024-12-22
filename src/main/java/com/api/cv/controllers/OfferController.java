@@ -63,7 +63,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @PostMapping()
-    public ResponseEntity<OfferResponseDto> create(@RequestBody OfferRequestDto offerDto) throws ApiErrorException {
+    public ResponseEntity<OfferResponseDto> create(@RequestBody OfferRequestDto offerDto) throws ApiErrorException, RessourceDbNotFoundException {
         LOG.debug("Request to CREATE offer: {}", offerDto);
         OfferResponseDto createdOffer = offerService.create(offerDto);
         return ResponseEntity.status(201).body(createdOffer);

@@ -17,7 +17,7 @@ public interface IOfferService {
 	
 	OfferResponseDto getByUuid(String uuid) throws RessourceDbNotFoundException;
 	
-	OfferResponseDto create(OfferRequestDto offerDto) throws ApiErrorException;
+	OfferResponseDto create(OfferRequestDto offerDto) throws ApiErrorException, RessourceDbNotFoundException;
 	
 	OfferResponseDto update(OfferUpdateRequestDto offerDto) throws ApiErrorException, UserNotConnectedException, RessourceDbNotFoundException;
 	
