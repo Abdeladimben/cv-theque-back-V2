@@ -8,6 +8,7 @@ import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.exceptions.ApiErrorException;
 
 import com.api.cv.exceptions.RessourceDbNotFoundException;
+import com.api.cv.exceptions.UserNotConnectedException;
 
 
 public interface IOfferService {
@@ -18,7 +19,7 @@ public interface IOfferService {
 	
 	OfferResponseDto create(OfferRequestDto offerDto) throws ApiErrorException;
 	
-	OfferResponseDto update(OfferUpdateRequestDto offerDto) throws ApiErrorException;
+	OfferResponseDto update(OfferUpdateRequestDto offerDto) throws ApiErrorException, UserNotConnectedException, RessourceDbNotFoundException;
 	
 	void delete(String uuid) throws RessourceDbNotFoundException;
 

@@ -25,7 +25,7 @@ public class AuthService implements IAuthService{
     private final UserRepository userRepository;
 
 	@Override
-	public LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException,RessourceAlreadyExistException {
+	public LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException, RessourceDbNotFoundException {
 		
 	    Optional<User> userOptional = userRepository.findByUserName(loginRequestDto.getUsername());
 

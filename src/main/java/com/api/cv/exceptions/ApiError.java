@@ -1,5 +1,6 @@
 package com.api.cv.exceptions;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import com.api.cv.enums.ErrorCode;
@@ -29,4 +30,13 @@ public class ApiError {
 		this.fieldsError = fieldsError;
 	}
 
+	@Override
+	public String toString() {
+		return "ApiError{" +
+				"errorCode=" + errorCode +
+				", message='" + message + '\'' +
+				", date='" + date + '\'' +
+				", fieldsError=" + Arrays.toString(fieldsError) +
+				'}';
+	}
 }

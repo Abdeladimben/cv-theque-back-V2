@@ -5,10 +5,11 @@ import com.api.cv.dto.auth.LoginResponseDto;
 import com.api.cv.dto.auth.RegisterRequestDto;
 import com.api.cv.exceptions.ApiErrorException;
 import com.api.cv.exceptions.RessourceAlreadyExistException;
+import com.api.cv.exceptions.RessourceDbNotFoundException;
 
 public interface IKeycloakService {
 	
-	LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException,RessourceAlreadyExistException;
+	LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException, RessourceDbNotFoundException;
 
 	void Signup(RegisterRequestDto registerRequestDto) throws ApiErrorException,RessourceAlreadyExistException;
 	
