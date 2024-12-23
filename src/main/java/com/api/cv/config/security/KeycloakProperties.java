@@ -15,8 +15,11 @@ public class KeycloakProperties {
     private String realm;
     private String clientId;
     private String clientSecret;
-    private String tokenUri;
-    private String userInfoUri;
+    private String uriToken;
+    private String uriUserInfo;
+    private String uriUsers;
+    private String uriUsersAssignRole;
+    private String uriRoles;
     private String adminUser;
     private String adminPassword;
     private String clientUuid;

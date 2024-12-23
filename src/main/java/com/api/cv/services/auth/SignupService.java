@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.api.cv.config.security.KeycloakProperties;
 import com.api.cv.consuming.keycloak.services.IKeycloakService;
-import com.api.cv.dto.auth.LoginRequestDto;
 import com.api.cv.dto.auth.RegisterRequestDto;
 import com.api.cv.entities.User;
 import com.api.cv.enums.ErrorCode;
@@ -25,17 +24,21 @@ public class SignupService implements ISignupService {
     private final KeycloakProperties keycloakProperties;
 	@Override
 	public void createUser(RegisterRequestDto registerRequestDto) throws ApiErrorException, RessourceAlreadyExistException {
-		
-	Optional<User> userOptional = userRepository.findByUserName(registerRequestDto.getUsername());
-    if (userOptional.isPresent()) {
-        throw new RessourceAlreadyExistException(ErrorCode.AU001);
+
+        Optional<User> userOptional = userRepository.findByUserName(registerRequestDto.getUsername());
+        if (userOptional.isPresent()) {
+            throw new RessourceAlreadyExistException(ErrorCode.AU001);
+        }
+
+        try {
+            keycloakService.Signup(registerRequestDto);
+        } catch (com.api.cv.exceptions.ConflitException e) {
+            throw new RuntimeException(e);
+        }
+        User user = new User();
+        user.setUserName(registerRequestDto.getUsername());
+        user.setEmail(registerRequestDto.getEmail());
+        userRepository.save(user);
     }
-    
-    keycloakService.Signup(registerRequestDto);
-    User user = new User();
-    user.setUserName(registerRequestDto.getUsername());
-    user.setEmail(registerRequestDto.getEmail());
-    userRepository.save(user);
-}
 
 }
