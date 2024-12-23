@@ -1,4 +1,4 @@
-package com.api.cv.consuming.keycloak.services;
+package com.api.cv.consuming.keycloak.services.signup;
 
 import com.api.cv.consuming.keycloak.model.KeycloakRole;
 import com.api.cv.dto.auth.LoginRequestDto;
@@ -8,9 +8,8 @@ import com.api.cv.exceptions.ApiErrorException;
 
 import java.util.List;
 
-public interface IKeycloakService {
-	
-	LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException;
+public interface IKeycloakSignUpService {
 
-    List<KeycloakRole> getRoles() throws ApiErrorException;
+    String Signup(RegisterRequestDto registerRequestDto) throws ApiErrorException;
+
 }

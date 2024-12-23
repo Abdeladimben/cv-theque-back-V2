@@ -46,7 +46,7 @@ public class User extends BaseModel{
 	
 	@Transient
 	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private  List<UserRole> userRoles= new ArrayList<>();;
+	private List<UserRole> userRoles= new ArrayList<>();
 	
 	
 	public List<Role> getRoles() {
