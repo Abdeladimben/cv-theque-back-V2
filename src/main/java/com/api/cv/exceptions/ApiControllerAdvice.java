@@ -35,6 +35,18 @@ public class ApiControllerAdvice {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiError(ex.getErrorCode()));
 	}
 
+	@ExceptionHandler({ConflitException.class})
+	public ResponseEntity<ApiError> handle(ConflitException ex) {
+		exceptionHandlerLoggerImpl.handle(ex);
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiError(ex.getErrorCode()));
+	}
+
+	@ExceptionHandler({NotFoundException.class})
+	public ResponseEntity<ApiError> handle(NotFoundException ex) {
+		exceptionHandlerLoggerImpl.handle(ex);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError(ex.getErrorCode()));
+	}
+
 	@ExceptionHandler({ MethodArgumentNotValidException.class })
 	public ResponseEntity<ApiError> handle(MethodArgumentNotValidException e) {
 

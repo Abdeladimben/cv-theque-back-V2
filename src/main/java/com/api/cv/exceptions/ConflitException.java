@@ -7,9 +7,9 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 
-public class BadRequestException extends ApiErrorException{
+public class ConflitException extends ApiErrorException{
 
-	public BadRequestException(ErrorCode errorCode) {
+	public ConflitException(ErrorCode errorCode) {
 		super(errorCode);
 	}
 
