@@ -28,7 +28,6 @@ public class OfferService implements IOfferService {
 
     private final OfferRepository offerRepository;
     private final OfferMapper offerMapper;
-    private final OfferMapperHelper offerMapperHelper;
     private final UserService userService;
 
     @Override
@@ -56,7 +55,7 @@ public class OfferService implements IOfferService {
 
     @Override
     @Transactional
-    public OfferResponseDto update(OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException, UserNotConnectedException, RessourceDbNotFoundException {
+    public OfferResponseDto update(OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException {
         Offer offer = offerRepository.findByUuid(offerUpdateRequestDto.getUuid())
                 .orElseThrow(() -> new RessourceDbNotFoundException(ErrorCode.A400));
 

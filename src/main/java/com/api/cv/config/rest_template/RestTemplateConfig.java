@@ -1,4 +1,4 @@
-package com.api.cv.config;
+package com.api.cv.config.rest_template;
 
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;

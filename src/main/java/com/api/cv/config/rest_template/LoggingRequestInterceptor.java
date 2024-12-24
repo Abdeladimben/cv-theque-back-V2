@@ -1,4 +1,4 @@
-package com.api.cv.config;
+package com.api.cv.config.rest_template;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,16 +50,12 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
      */
     private void traceRequest(HttpRequest request, byte[] body) {
         if (LOG.isInfoEnabled()) {
-            LOG.info(String.format(
-                    "=========================== %s rest api request begins ================================================",
-                    endpoint));
-            LOG.info(String.format("URI         : %s", request.getURI()));
-            LOG.info(String.format("Method      : %s", request.getMethod()));
-            LOG.info(String.format("Headers     : %s", request.getHeaders()));
-            LOG.info(String.format("Request body: %s", new String(body, StandardCharsets.UTF_8)));
-            LOG.info(String.format(
-                    "=========================== %s rest api request end ================================================",
-                    endpoint));
+            LOG.info("=========================== {} rest api request begins ================================================", endpoint);
+            LOG.info("URI         : {}", request.getURI());
+            LOG.info("Method      : {}", request.getMethod());
+            LOG.info("Headers     : {}", request.getHeaders());
+            LOG.info("Request body: {}", new String(body, StandardCharsets.UTF_8));
+            LOG.info("=========================== {} rest api request end ================================================", endpoint);
         }
     }
 
@@ -87,18 +83,13 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
                     throw new RuntimeException(e);
                 }
             }
-            LOG.info(String.format(
-                    "============================ %s rest api response begins ==========================================",
-                    endpoint));
-            LOG.info(String.format("Status code  : %s", response.getStatusCode()));
-            LOG.info(String.format("Status text  : %s", response.getStatusText()));
-            LOG.info(String.format("Headers      : %s", response.getHeaders()));
-            LOG.info(String.format("Duration (ms) of Api (%s) \"%s\" = %s", request.getMethod(),
-                    request.getURI().getPath(), duration));
-            LOG.info(String.format("Response body: %s", inputStringBuilder.toString()));
-            LOG.info(String.format(
-                    "============================ %s rest api response end =================================================",
-                    endpoint));
+            LOG.info("============================ {} rest api response begins ==========================================", endpoint);
+            LOG.info("Status code  : {}", response.getStatusCode());
+            LOG.info("Status text  : {}", response.getStatusText());
+            LOG.info("Headers      : {}", response.getHeaders());
+            LOG.info("Duration (ms) of Api ({}) \"{}\" = {}", request.getMethod(), request.getURI().getPath(), duration);
+            LOG.info("Response body: {}", inputStringBuilder.toString());
+            LOG.info("============================ {} rest api response end =================================================", endpoint);
         }
     }
 
