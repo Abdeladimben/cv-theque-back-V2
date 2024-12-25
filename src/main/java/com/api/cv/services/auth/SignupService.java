@@ -24,11 +24,11 @@ public class SignupService implements ISignupService {
     private final UserRepository userRepository;
     private final KeycloakProperties keycloakProperties;
 	@Override
-	public void createUser(RegisterRequestDto registerRequestDto) throws ApiErrorException, RessourceAlreadyExistException {
+	public void createUser(RegisterRequestDto registerRequestDto) throws ApiErrorException,RessourceAlreadyExistException {
 		
 	Optional<User> userOptional = userRepository.findByUserName(registerRequestDto.getUsername());
     if (userOptional.isPresent()) {
-        throw new RessourceAlreadyExistException(ErrorCode.AU001);
+        throw new RessourceAlreadyExistException(ErrorCode.AU003);
     }
     
     keycloakService.Signup(registerRequestDto);
