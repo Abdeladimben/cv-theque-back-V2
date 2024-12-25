@@ -1,6 +1,7 @@
 package com.api.cv.exceptions;
 
 import com.api.cv.enums.ErrorCode;
+import com.api.cv.exceptions.base_exception.*;
 import com.api.cv.exceptions.logger.ExceptionHandlerLogger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

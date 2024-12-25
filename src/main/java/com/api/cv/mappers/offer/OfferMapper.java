@@ -3,13 +3,9 @@ package com.api.cv.mappers.offer;
 import java.util.List;
 
 import com.api.cv.entities.User;
-import com.api.cv.entities.offer.OfferStatus;
-import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.exceptions.RessourceDbNotFoundException;
-import com.api.cv.repositories.OfferStatusRepository;
 import com.api.cv.services.user.UserService;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.*;
 
 import com.api.cv.dto.offer.OfferRequestDto;

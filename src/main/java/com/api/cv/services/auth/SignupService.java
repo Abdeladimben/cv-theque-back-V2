@@ -7,17 +7,14 @@ import java.util.Optional;
 import com.api.cv.consuming.keycloak.services.signup.IKeycloakSignUpService;
 import com.api.cv.entities.Role;
 import com.api.cv.entities.UserRole;
-import com.api.cv.exceptions.ConflitException;
 import com.api.cv.repositories.RoleRepository;
 import com.api.cv.repositories.UserRoleRepository;
 import org.springframework.stereotype.Service;
 
-import com.api.cv.config.security.KeycloakProperties;
-import com.api.cv.consuming.keycloak.services.IKeycloakService;
 import com.api.cv.dto.auth.RegisterRequestDto;
 import com.api.cv.entities.User;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.exceptions.RessourceAlreadyExistException;
 import com.api.cv.repositories.UserRepository;
 

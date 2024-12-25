@@ -1,4 +1,4 @@
-package com.api.cv.exceptions;
+package com.api.cv.exceptions.base_exception;
 
 import java.io.Serial;
 

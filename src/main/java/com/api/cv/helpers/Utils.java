@@ -1,9 +1,9 @@
 package com.api.cv.helpers;
 
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
-import com.api.cv.exceptions.ConflitException;
-import com.api.cv.exceptions.NotFoundException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ConflitException;
+import com.api.cv.exceptions.base_exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;

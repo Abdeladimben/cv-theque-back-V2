@@ -1,8 +1,8 @@
-package com.api.cv.exceptions;
+package com.api.cv.exceptions.base_exception;
 
 import com.api.cv.enums.ErrorCode;
 
-public class NotFoundException extends ApiErrorException{
+public class NotFoundException extends ApiErrorException {
 
 	public NotFoundException(ErrorCode errorCode) {
 		super(errorCode);

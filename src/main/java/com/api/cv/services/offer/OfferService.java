@@ -9,11 +9,10 @@ import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.entities.offer.Offer;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.exceptions.RessourceDbNotFoundException;
 import com.api.cv.exceptions.UserNotConnectedException;
 import com.api.cv.mappers.offer.OfferMapper;
-import com.api.cv.mappers.offer.helpers.OfferMapperHelper;
 import com.api.cv.repositories.OfferRepository;
 import com.api.cv.services.user.UserService;
 

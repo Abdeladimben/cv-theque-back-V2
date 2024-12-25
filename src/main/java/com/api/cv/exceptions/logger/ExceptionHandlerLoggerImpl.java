@@ -1,7 +1,7 @@
 package com.api.cv.exceptions.logger;
 
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

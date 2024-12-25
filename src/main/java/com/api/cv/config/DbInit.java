@@ -3,13 +3,11 @@ package com.api.cv.config;
 import com.api.cv.consuming.keycloak.model.KeycloakRole;
 import com.api.cv.consuming.keycloak.services.KeycloakService;
 import com.api.cv.entities.Role;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.repositories.RoleRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.cv.dto.offer.OfferRequestDto;
 import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.services.offer.IOfferService;
 
 import io.swagger.v3.oas.annotations.Operation;

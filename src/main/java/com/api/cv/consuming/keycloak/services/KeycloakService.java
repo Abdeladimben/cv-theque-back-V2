@@ -1,17 +1,8 @@
 package com.api.cv.consuming.keycloak.services;
 
-import java.net.URI;
-import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.api.cv.consuming.keycloak.model.KeycloakAssignRole;
 import com.api.cv.consuming.keycloak.model.KeycloakRole;
-import com.api.cv.consuming.keycloak.model.KeycloakUserInformation;
-import com.api.cv.exceptions.ConflitException;
-import com.api.cv.exceptions.NotFoundException;
 import com.api.cv.helpers.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -25,12 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import com.api.cv.config.security.KeycloakProperties;
 import com.api.cv.dto.auth.LoginRequestDto;
 import com.api.cv.dto.auth.LoginResponseDto;
-import com.api.cv.dto.auth.RegisterRequestDto;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @RequiredArgsConstructor
 @Slf4j
