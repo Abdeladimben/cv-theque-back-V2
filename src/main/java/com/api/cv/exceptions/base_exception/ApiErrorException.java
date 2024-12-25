@@ -1,12 +1,11 @@
 package com.api.cv.exceptions.base_exception;
 
-import java.io.Serial;
-
 import com.api.cv.enums.ErrorCode;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor

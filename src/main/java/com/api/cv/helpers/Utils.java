@@ -18,7 +18,7 @@ public class Utils {
 	
     public static  String getHashedUuid( LocalDateTime dateCreation,  Long id) {
         UUID uuid = UUID.randomUUID();
-        String hashString = uuid.toString() + dateCreation.toString() + id.toString();
+        String hashString = uuid + dateCreation.toString() + id.toString();
         byte[] hashBytes = sha256(hashString.getBytes(StandardCharsets.UTF_8));
         return bytesToHex(hashBytes);
     }

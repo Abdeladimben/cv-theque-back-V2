@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.ClientHttpResponse;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -88,7 +88,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
             LOG.info("Status text  : {}", response.getStatusText());
             LOG.info("Headers      : {}", response.getHeaders());
             LOG.info("Duration (ms) of Api ({}) \"{}\" = {}", request.getMethod(), request.getURI().getPath(), duration);
-            LOG.info("Response body: {}", inputStringBuilder.toString());
+            LOG.info("Response body: {}", inputStringBuilder);
             LOG.info("============================ {} rest api response end =================================================", endpoint);
         }
     }
