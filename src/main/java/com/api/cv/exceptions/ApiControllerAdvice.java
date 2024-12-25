@@ -1,6 +1,7 @@
 package com.api.cv.exceptions;
 
 import com.api.cv.enums.ErrorCode;
+import com.api.cv.exceptions.base_exception.*;
 import com.api.cv.exceptions.logger.ExceptionHandlerLogger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,18 @@ public class ApiControllerAdvice {
 	public ResponseEntity<ApiError> handle(ForbiddenException ex) {
 		exceptionHandlerLoggerImpl.handle(ex);
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiError(ex.getErrorCode()));
+	}
+
+	@ExceptionHandler({ConflitException.class})
+	public ResponseEntity<ApiError> handle(ConflitException ex) {
+		exceptionHandlerLoggerImpl.handle(ex);
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiError(ex.getErrorCode()));
+	}
+
+	@ExceptionHandler({NotFoundException.class})
+	public ResponseEntity<ApiError> handle(NotFoundException ex) {
+		exceptionHandlerLoggerImpl.handle(ex);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError(ex.getErrorCode()));
 	}
 
 	@ExceptionHandler({ MethodArgumentNotValidException.class })

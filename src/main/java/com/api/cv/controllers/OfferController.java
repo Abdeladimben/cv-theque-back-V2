@@ -20,9 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.cv.dto.offer.OfferRequestDto;
 import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
-import com.api.cv.exceptions.ApiErrorException;
-import com.api.cv.exceptions.RessourceDbNotFoundException;
-import com.api.cv.exceptions.UserNotConnectedException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
+
 import com.api.cv.services.offer.IOfferService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,20 +52,6 @@ public class OfferController {
         return offerService.getFilteredOffers(title, ville, remuneration, dureeContrat, pageable);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @Operation(summary = "Get all offers endpoint", description = "Get all offers exist")
     @ApiResponse(responseCode = "200", description = "offers retrieved successfully")
     @ApiResponse(responseCode = "500", description = "Internal server error")
@@ -81,7 +66,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @GetMapping("{uuid}")
-    public ResponseEntity<OfferResponseDto> getByUuid(@PathVariable String uuid) throws ApiErrorException, RessourceDbNotFoundException {
+    public ResponseEntity<OfferResponseDto> getByUuid(@PathVariable String uuid) throws ApiErrorException {
    
         return ResponseEntity.ok(offerService.getByUuid(uuid));
     }
@@ -91,7 +76,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @PostMapping()
-    public ResponseEntity<OfferResponseDto> create(@RequestBody OfferRequestDto offerDto) throws ApiErrorException, RessourceDbNotFoundException {
+    public ResponseEntity<OfferResponseDto> create(@RequestBody OfferRequestDto offerDto) throws ApiErrorException {
        
         OfferResponseDto createdOffer = offerService.create(offerDto);
         return ResponseEntity.status(201).body(createdOffer);
@@ -102,7 +87,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @PutMapping()
-    public ResponseEntity<OfferResponseDto> update(@RequestBody OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException, UserNotConnectedException, RessourceDbNotFoundException {
+    public ResponseEntity<OfferResponseDto> update(@RequestBody OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException {
        
         OfferResponseDto updatedOffer = offerService.update(offerUpdateRequestDto);
         return ResponseEntity.ok(updatedOffer);
@@ -113,7 +98,7 @@ public class OfferController {
     @ApiResponse(responseCode = "400", description = "Invalid UUID")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @DeleteMapping("{uuid}")
-    public ResponseEntity<Void> delete(@PathVariable String uuid) throws ApiErrorException, RessourceDbNotFoundException {
+    public ResponseEntity<Void> delete(@PathVariable String uuid) throws ApiErrorException {
         LOG.debug("Request to DELETE offer by UUID: {}", uuid);
         offerService.delete(uuid);
         return ResponseEntity.noContent().build();

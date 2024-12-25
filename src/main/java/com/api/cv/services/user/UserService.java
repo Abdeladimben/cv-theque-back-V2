@@ -2,7 +2,6 @@ package com.api.cv.services.user;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.api.cv.dto.user.UserKeycloakInfoResponse;
 import com.api.cv.entities.User;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -11,11 +11,10 @@ import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.entities.offer.Offer;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.exceptions.RessourceDbNotFoundException;
 import com.api.cv.exceptions.UserNotConnectedException;
 import com.api.cv.mappers.offer.OfferMapper;
-import com.api.cv.mappers.offer.helpers.OfferMapperHelper;
 import com.api.cv.repositories.OfferRepository;
 import com.api.cv.services.user.UserService;
 
@@ -30,7 +29,6 @@ public class OfferService implements IOfferService {
 
     private final OfferRepository offerRepository;
     private final OfferMapper offerMapper;
-    private final OfferMapperHelper offerMapperHelper;
     private final UserService userService;
 
     @Override
@@ -58,7 +56,7 @@ public class OfferService implements IOfferService {
 
     @Override
     @Transactional
-    public OfferResponseDto update(OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException, UserNotConnectedException, RessourceDbNotFoundException {
+    public OfferResponseDto update(OfferUpdateRequestDto offerUpdateRequestDto) throws ApiErrorException {
         Offer offer = offerRepository.findByUuid(offerUpdateRequestDto.getUuid())
                 .orElseThrow(() -> new RessourceDbNotFoundException(ErrorCode.A400));
 
