@@ -2,6 +2,9 @@ package com.api.cv.services.offer;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.api.cv.dto.offer.OfferRequestDto;
 import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
@@ -23,5 +26,11 @@ public interface IOfferService {
 	
 	void delete(String uuid) throws RessourceDbNotFoundException;
 
-
+	Page<OfferResponseDto> getFilteredOffers( String title,
+            String ville,
+            Double remuneration,
+            Integer dureeContrat,
+            Pageable pageable);
+	
+	
 }

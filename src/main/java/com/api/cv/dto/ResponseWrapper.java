@@ -28,7 +28,6 @@ public class ResponseWrapper<T> {
 	  
 	  
 	  public ResponseWrapper(List<T> responseList,String successMessage, Integer errorCode) {
-		  
 		  this.responseList=responseList;
 		  this.successMessage = successMessage;
 	        this.errorCode = errorCode;

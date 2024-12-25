@@ -2,6 +2,8 @@ package com.api.cv.services.offer;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.cv.dto.offer.OfferRequestDto;
@@ -75,4 +77,22 @@ public class OfferService implements IOfferService {
         offer.setDelete(true);
         offerRepository.save(offer);
     }
+
+	@Override
+	public Page<OfferResponseDto> getFilteredOffers(String title, String ville, Double remuneration,
+			Integer dureeContrat, Pageable pageable) {
+		 Page<Offer> offers = offerRepository.findFilteredOffers(title, ville, remuneration, dureeContrat, pageable);
+	        return offers.map(offerMapper::EntityToDto);
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
