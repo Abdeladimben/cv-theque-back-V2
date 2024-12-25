@@ -1,16 +1,15 @@
-package com.api.cv.mappers.offer.helpers;
+package com.api.cv.mappers.offer;
 
-import org.springframework.stereotype.Component;
-
-import com.api.cv.entities.offer.ContractType;
 import com.api.cv.entities.offer.Offer;
-import com.api.cv.entities.offer.OfferStatus;
+import com.api.cv.entities.referentiel.ContractType;
+import com.api.cv.entities.referentiel.OfferStatus;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.exceptions.RessourceDbNotFoundException;
-import com.api.cv.repositories.ContractTypeRepository;
-import com.api.cv.repositories.OfferStatusRepository;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
+import com.api.cv.repositories.referentiel.ContractTypeRepository;
+import com.api.cv.repositories.referentiel.OfferStatusRepository;
 import com.api.cv.services.user.UserService;
+import org.springframework.stereotype.Component;
 
 @Component
 public class OfferMapperHelper {
