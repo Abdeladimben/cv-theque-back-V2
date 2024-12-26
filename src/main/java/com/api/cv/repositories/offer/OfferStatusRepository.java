@@ -1,4 +1,4 @@
-package com.api.cv.repositories;
+package com.api.cv.repositories.offer;
 
 import java.util.Optional;
 

@@ -3,19 +3,24 @@ package com.api.cv.services.offer;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.api.cv.dto.PaginationResultDto;
 import com.api.cv.dto.offer.OfferRequestDto;
 import com.api.cv.dto.offer.OfferResponseDto;
+import com.api.cv.dto.offer.OfferSearchRequestDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.entities.offer.Offer;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.base_exception.ApiErrorException;
+
 import com.api.cv.exceptions.RessourceDbNotFoundException;
 import com.api.cv.exceptions.UserNotConnectedException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.mappers.offer.OfferMapper;
-import com.api.cv.repositories.OfferRepository;
+import com.api.cv.repositories.offer.OfferRepository;
+import com.api.cv.repositories.offer.OfferSpecification;
 import com.api.cv.services.user.UserService;
 
 import jakarta.transaction.Transactional;
@@ -78,6 +83,37 @@ public class OfferService implements IOfferService {
         offerRepository.save(offer);
     }
 
+    
+    
+    
+    @Override
+    public PaginationResultDto<OfferResponseDto> searchOffers(OfferSearchRequestDto offerSearchRequestDto, int page, int size) {
+        // Create Pageable object for pagination
+        Pageable pageable = PageRequest.of(page, size);
+
+        // Build the specification based on the search request
+        var specification = OfferSpecification.filterOffers(offerSearchRequestDto);
+
+        // Fetch the paginated result using the repository
+        Page<Offer> offers = offerRepository.findAll(specification, pageable);
+
+        // Map the Page<Offer> to List<OfferResponseDto> using the mapper
+        List<OfferResponseDto> offerResponseDtos = offers.getContent()
+            .stream()
+            .map(offerMapper::EntityToDto)
+            .toList();
+
+        // Create and return PaginationResultDto
+        return new PaginationResultDto<>(
+            offerResponseDtos,                        // List of DTOs
+            offers.getTotalPages(),                   // Total number of pages
+            offers.getTotalElements(),                // Total number of items
+            offers.getNumber(),                       // Current page
+            offers.getSize()                          // Size of each page
+        );
+    }
+    
+    /*
 	@Override
 	public Page<OfferResponseDto> getFilteredOffers(String title, String ville, Double remuneration,
 			Integer dureeContrat, Pageable pageable) {
@@ -86,7 +122,7 @@ public class OfferService implements IOfferService {
 	}
     
     
-    
+    */
     
     
     

@@ -1,9 +1,10 @@
-package com.api.cv.repositories;
+package com.api.cv.repositories.offer;
 
 import java.util.Optional;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 
 
 @Repository
-public interface OfferRepository extends JpaRepository<Offer, Long>{
+public interface OfferRepository extends JpaRepository<Offer, Long>, JpaSpecificationExecutor<Offer>{
 	 
 	  void deleteByUuid(String uuid);
 	    Optional<Offer> findByUuid(String uuid);
@@ -22,7 +23,7 @@ public interface OfferRepository extends JpaRepository<Offer, Long>{
 	    
 	    //pagination
 	    
-	    
+	    /*
 	    @Query("SELECT o FROM Offer o WHERE " +
 	            "(:title IS NULL OR o.title LIKE %:title%) AND " +
 	            "(:ville IS NULL OR o.ville LIKE %:ville%) AND " +
@@ -35,5 +36,5 @@ public interface OfferRepository extends JpaRepository<Offer, Long>{
 	            @Param("dureeContrat") Integer dureeContrat,
 	            Pageable pageable
 	    );
-
+*/
 }
