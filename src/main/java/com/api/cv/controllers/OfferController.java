@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.cv.dto.PaginationResultDto;
 import com.api.cv.dto.offer.OfferRequestDto;
 import com.api.cv.dto.offer.OfferResponseDto;
+import com.api.cv.dto.offer.OfferSearchRequestDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.exceptions.base_exception.ApiErrorException;
 
@@ -40,17 +43,7 @@ public class OfferController {
     public OfferController(IOfferService offerService) {
         this.offerService = offerService;
     }
-
-    @GetMapping("/offers")
-    public Page<OfferResponseDto> getFilteredOffers(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String ville,
-            @RequestParam(required = false) Double remuneration,
-            @RequestParam(required = false) Integer dureeContrat,
-            Pageable pageable
-    ) {
-        return offerService.getFilteredOffers(title, ville, remuneration, dureeContrat, pageable);
-    }
+    
     
     @Operation(summary = "Get all offers endpoint", description = "Get all offers exist")
     @ApiResponse(responseCode = "200", description = "offers retrieved successfully")
@@ -104,7 +97,18 @@ public class OfferController {
         return ResponseEntity.noContent().build();
     }
     
-    
+    @GetMapping("search")
+    public ResponseEntity<PaginationResultDto<OfferResponseDto>> searchOffers(
+            @ModelAttribute OfferSearchRequestDto offerSearchRequestDto,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        // Call the service to fetch paginated results
+        PaginationResultDto<OfferResponseDto> response = offerService.searchOffers(offerSearchRequestDto, page, size);
+
+        // Return the response entity
+        return ResponseEntity.ok(response);
+    }
     
     
     
