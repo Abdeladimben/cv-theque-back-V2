@@ -28,12 +28,12 @@ public class DbInit {
     private void postConstruct() throws ApiErrorException {
         if( roleRepository.count()==0 ) {
             log.info("************************************************************** START GET ROLES **************************************************************");
-            getAllRoles();
+            saveRolesFromKeycloak();
             log.info("************************************************************** END GET ROLES **************************************************************");
         }
     }
 
-    private void getAllRoles() throws ApiErrorException {
+    private void saveRolesFromKeycloak() throws ApiErrorException {
 
         List<KeycloakRole> keycloakRoles = keycloakService.getRoles();
 
@@ -49,5 +49,9 @@ public class DbInit {
             roles.add(role);
         }
         roleRepository.saveAll(roles);
+    }
+
+    private void saveContractType() {
+
     }
 }
