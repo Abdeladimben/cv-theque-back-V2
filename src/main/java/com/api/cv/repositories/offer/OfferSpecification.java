@@ -3,6 +3,7 @@ package com.api.cv.repositories.offer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.api.cv.helpers.Utils;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.api.cv.dto.offer.OfferSearchRequestDto;
@@ -17,7 +18,7 @@ public class OfferSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             // Title filtering
-            if (offerSearchRequestDto.getTitle() != null && !offerSearchRequestDto.getTitle().isEmpty()) {
+            if (Utils.isNotNullAndNotEmpty(offerSearchRequestDto.getTitle())) {
                 predicates.add(criteriaBuilder.like(
                     criteriaBuilder.lower(root.get("title")),
                     "%" + offerSearchRequestDto.getTitle().toLowerCase() + "%"
@@ -25,7 +26,7 @@ public class OfferSpecification {
             }
 
             // Description filtering
-            if (offerSearchRequestDto.getDescription() != null && !offerSearchRequestDto.getDescription().isEmpty()) {
+            if (Utils.isNotNullAndNotEmpty(offerSearchRequestDto.getDescription())) {
                 predicates.add(criteriaBuilder.like(
                     criteriaBuilder.lower(root.get("description")),
                     "%" + offerSearchRequestDto.getDescription().toLowerCase() + "%"
@@ -33,7 +34,7 @@ public class OfferSpecification {
             }
 
             // Post filtering
-            if (offerSearchRequestDto.getPost() != null && !offerSearchRequestDto.getPost().isEmpty()) {
+            if (Utils.isNotNullAndNotEmpty(offerSearchRequestDto.getPost())) {
                 predicates.add(criteriaBuilder.like(
                     criteriaBuilder.lower(root.get("post")),
                     "%" + offerSearchRequestDto.getPost().toLowerCase() + "%"
@@ -41,7 +42,7 @@ public class OfferSpecification {
             }
 
             // Ville filtering
-            if (offerSearchRequestDto.getVille() != null && !offerSearchRequestDto.getVille().isEmpty()) {
+            if (Utils.isNotNullAndNotEmpty(offerSearchRequestDto.getVille())) {
                 predicates.add(criteriaBuilder.like(
                     criteriaBuilder.lower(root.get("ville")),
                     "%" + offerSearchRequestDto.getVille().toLowerCase() + "%"
@@ -76,6 +77,29 @@ public class OfferSpecification {
                 ));
             }
 
+            // Status code filtering
+            if (Utils.isNotNullAndNotEmpty(offerSearchRequestDto.getStatusOffreCode())) {
+                predicates.add(criteriaBuilder.equal(
+                    root.join("offerStatus").get("code"),
+                    offerSearchRequestDto.getStatusOffreCode()
+                ));
+            }
+
+            // Status code filtering
+            if (Utils.isNotNullAndNotEmpty(offerSearchRequestDto.getTypeContractCode())) {
+                predicates.add(criteriaBuilder.equal(
+                    root.join("contractType").get("code"),
+                    offerSearchRequestDto.getTypeContractCode()
+                ));
+            }
+            
+            // Status code filtering
+            if (Utils.isNotNullAndNotEmpty(offerSearchRequestDto.getUsername())) {
+                predicates.add(criteriaBuilder.equal(
+                    root.join("createdUser").get("userName"),
+                    offerSearchRequestDto.getUsername()
+                ));
+            }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }

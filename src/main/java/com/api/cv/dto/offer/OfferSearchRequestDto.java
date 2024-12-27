@@ -29,7 +29,14 @@ public class OfferSearchRequestDto {
 	@Schema(description = "Duration of the contract in months", example = "12", required = true)
 	private int dureeContrat;
 
+	@Schema(description = "Offre Status Code", example = "1", required = true)
+	private String statusOffreCode;
 
+	@Schema(description = "Type Contract Code", example = "1", required = true)
+	private String typeContractCode;
+
+	@Schema(description = "user who create the offer", example = "1", required = true)
+	private String username;
 	
 	@Schema(description = "Min Date", example = "1", required = true)
 	private LocalDate creationDateMin;

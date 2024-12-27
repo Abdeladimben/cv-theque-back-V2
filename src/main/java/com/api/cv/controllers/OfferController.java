@@ -43,21 +43,6 @@ public class OfferController {
     public OfferController(IOfferService offerService) {
         this.offerService = offerService;
     }
-
-    
-    /*
-    @GetMapping("/offers")
-    public Page<OfferResponseDto> getFilteredOffers(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String ville,
-            @RequestParam(required = false) Double remuneration,
-            @RequestParam(required = false) Integer dureeContrat,
-            Pageable pageable
-    ) {
-        return offerService.getFilteredOffers(title, ville, remuneration, dureeContrat, pageable);
-    }
-    
-    */
     
     
     @Operation(summary = "Get all offers endpoint", description = "Get all offers exist")
@@ -112,7 +97,7 @@ public class OfferController {
         return ResponseEntity.noContent().build();
     }
     
-    @GetMapping("/all/")
+    @GetMapping("search")
     public ResponseEntity<PaginationResultDto<OfferResponseDto>> searchOffers(
             @ModelAttribute OfferSearchRequestDto offerSearchRequestDto,
             @RequestParam(defaultValue = "0") int page,
