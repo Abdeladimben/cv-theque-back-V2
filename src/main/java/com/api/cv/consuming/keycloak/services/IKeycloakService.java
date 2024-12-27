@@ -1,21 +1,15 @@
 package com.api.cv.consuming.keycloak.services;
 
+import com.api.cv.consuming.keycloak.model.KeycloakRole;
 import com.api.cv.dto.auth.LoginRequestDto;
 import com.api.cv.dto.auth.LoginResponseDto;
-import com.api.cv.dto.auth.RegisterRequestDto;
-import com.api.cv.exceptions.ApiErrorException;
-import com.api.cv.exceptions.RessourceAlreadyExistException;
-import com.api.cv.exceptions.RessourceDbNotFoundException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
+
+import java.util.List;
 
 public interface IKeycloakService {
 	
-	LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException, RessourceDbNotFoundException;
+	LoginResponseDto login(LoginRequestDto loginRequestDto) throws ApiErrorException;
 
-	void Signup(RegisterRequestDto registerRequestDto) throws ApiErrorException,RessourceAlreadyExistException;
-	
-     String getUserIdByUsername(String username, String token) throws ApiErrorException;
-	
-     boolean assignRoleToUser(String userId, String roleName, String token)throws ApiErrorException;
-	
-     String getRoleIdByName(String roleName, String token)throws ApiErrorException;
+    List<KeycloakRole> getRoles() throws ApiErrorException;
 }

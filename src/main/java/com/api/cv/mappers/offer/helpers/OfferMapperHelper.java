@@ -6,10 +6,10 @@ import com.api.cv.entities.offer.ContractType;
 import com.api.cv.entities.offer.Offer;
 import com.api.cv.entities.offer.OfferStatus;
 import com.api.cv.enums.ErrorCode;
-import com.api.cv.exceptions.ApiErrorException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.exceptions.RessourceDbNotFoundException;
-import com.api.cv.repositories.ContractTypeRepository;
-import com.api.cv.repositories.OfferStatusRepository;
+import com.api.cv.repositories.offer.ContractTypeRepository;
+import com.api.cv.repositories.offer.OfferStatusRepository;
 import com.api.cv.services.user.UserService;
 
 @Component

@@ -25,7 +25,19 @@ public class Role extends BaseModel{
 	@Serial
 	private static final long serialVersionUID = 8009510240735873447L;
 	
-	@Column(name = "label",nullable = false,unique = true)
+	@Column(name = "label",unique = true)
 	private String label;
+
+	@Column(name = "id_keycloak",nullable = false,unique = true)
+	private String idKeycloak;
+
+	@Column(name = "is_composite",columnDefinition = "boolean default false")
+	private boolean composite;
+
+	@Column(name = "is_client_role",columnDefinition = "boolean default false")
+	private boolean clientRole;
+
+	@Column(name = "id_container")
+	private String containerId;
 	
 }

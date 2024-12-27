@@ -1,7 +1,7 @@
 package com.api.cv.controllers;
 
-import com.api.cv.enums.ErrorCode;
 import com.api.cv.exceptions.*;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
 import io.swagger.v3.oas.annotations.media.Content;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,28 +1,29 @@
-package com.api.cv.exceptions;
+package com.api.cv.exceptions.base_exception;
+
+import java.io.Serial;
 
 import com.api.cv.enums.ErrorCode;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serial;
-
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @Data
-public class ForbiddenException extends Exception{
-
+public class ApiErrorException extends Exception{
+	
 	/**
-	 *
+	 * 
 	 */
 	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private ErrorCode errorCode;
-
+	
 	private String message;
-
-	public ForbiddenException(ErrorCode errorCode) {
+	
+	public ApiErrorException(ErrorCode errorCode) {
 		this.errorCode = errorCode;
 	}
 
