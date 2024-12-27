@@ -54,7 +54,9 @@ public class KeycloakSignUpService implements IKeycloakSignUpService {
             Utils.manageKeycloakErrorWithException(e);// HTTP client error during user creation
         }
         String userId = getUserIdByUsername(registerRequestDto.getUsername(), token);
-        assignRoleToUser(userId, registerRequestDto.getRoles(), token);
+        if(registerRequestDto.getRoles()!=null && !registerRequestDto.getRoles().isEmpty()){
+            assignRoleToUser(userId, registerRequestDto.getRoles(), token);
+        }
         return userId;
     }
 

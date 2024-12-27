@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.api.cv.consuming.keycloak.services.signup.IKeycloakSignUpService;
 import com.api.cv.entities.Role;
 import com.api.cv.entities.UserRole;
+import com.api.cv.helpers.Utils;
 import com.api.cv.repositories.RoleRepository;
 import com.api.cv.repositories.UserRoleRepository;
 import org.springframework.stereotype.Service;
@@ -39,17 +40,23 @@ public class SignupService implements ISignupService {
             throw new RessourceAlreadyExistException(ErrorCode.AU001);
         }
         String keycloakUserId = keycloakSignUpService.Signup(registerRequestDto);
-        saveUserWithRoles(keycloakUserId, registerRequestDto);
+        User user = saveUserWithRoles(keycloakUserId, registerRequestDto);
+        if(Utils.isNotNullAndNotEmpty(registerRequestDto.getRoles())) {
+            saveUserRoles(user, registerRequestDto.getRoles());
+        }
     }
 
-    private void saveUserWithRoles(String keycloakUserId , RegisterRequestDto registerRequestDto){
+    private User saveUserWithRoles(String keycloakUserId , RegisterRequestDto registerRequestDto){
         User user = new User();
         user.setUserName(registerRequestDto.getUsername());
         user.setEmail(registerRequestDto.getEmail());
         user.setKeycloakId(keycloakUserId);
-        userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    private void saveUserRoles(User user,List<String> roles) {
         List<UserRole> userRoles = new ArrayList<>();
-        for (String label : registerRequestDto.getRoles()) {
+        for (String label : roles) {
             Role role = roleRepository.findByLabel(label);
             userRoles.add(new UserRole(user,role));
         }
