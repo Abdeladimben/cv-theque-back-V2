@@ -3,6 +3,7 @@ package com.api.cv.entities;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -84,8 +85,10 @@ public abstract class BaseModel implements Serializable{
 
 	@PostPersist
 	public void postPersist() {
-		String Uuid = Utils.getHashedUuid(this.createDateTime, this.getId());
-		this.setUuid(Uuid);
+		if (this.getId() != null) { // Ensure the ID is generated
+			String uuid = Utils.getHashedUuid(this.createDateTime.toInstant(ZoneOffset.UTC), this.getId());
+			this.setUuid(uuid); // Set the UUID
+		}
 	}
 
 	@Override
