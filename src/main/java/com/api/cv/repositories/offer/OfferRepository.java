@@ -3,6 +3,7 @@ package com.api.cv.repositories.offer;
 import java.util.Optional;
 
 
+import com.api.cv.repositories.BaseRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface OfferRepository extends BaseRepository<Offer, Long>{
+public interface OfferRepository extends BaseRepository<Offer, Long> {
 
 /*
 	    @Query("SELECT o FROM Offer o WHERE " +
