@@ -1,7 +1,7 @@
 package com.api.cv.dto.offer;
 
+import com.api.cv.dto.ReferentielDto;
 import com.api.cv.dto.user.UserDto;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,9 +26,9 @@ public class OfferResponseDto {
     private UserDto createdUser; 
 
 	@Schema(description = " the status of the offer", example="Active", required = true)	
-    private OfferStatusDto offerStatus;
+    private ReferentielDto offerStatus;
 	
 	@Schema(description = " the status of the offer", example="Active", required = true)	
-    private ContractTypeDto contractType;
+    private ReferentielDto contractType;
 	
 }

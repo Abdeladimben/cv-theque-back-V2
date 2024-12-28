@@ -1,4 +1,4 @@
-package com.api.cv.entities.offer;
+package com.api.cv.entities.referentiel;
 
 
 import java.io.Serial;
@@ -11,13 +11,17 @@ import org.hibernate.annotations.Where;
 import com.api.cv.entities.BaseModel;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Where;
 
+import java.io.Serial;
 
-@Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
 @Table(name = "api_offer_status")
 @Where(clause = "is_delete = false")
-public class OfferStatus extends BaseModel {
+public class OfferStatus extends BaseModelReferentiel {
 	
 	@Serial
 	private static final long serialVersionUID = -7898756852479386599L;
@@ -33,8 +37,5 @@ public class OfferStatus extends BaseModel {
 
 	@Column(name = "code", nullable = true)
 	private String code;
-	
-	@Column(name="libelle")
-	private String libelle;
 	
 }

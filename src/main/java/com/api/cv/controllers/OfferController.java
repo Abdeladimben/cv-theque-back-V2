@@ -24,12 +24,18 @@ import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferSearchRequestDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
 import com.api.cv.exceptions.base_exception.ApiErrorException;
-
 import com.api.cv.services.offer.IOfferService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("${endpoint.prefix}offers")

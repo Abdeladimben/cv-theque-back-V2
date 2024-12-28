@@ -1,19 +1,17 @@
 package com.api.cv.mappers.offer;
 
-import java.util.List;
-
-import com.api.cv.entities.User;
-import com.api.cv.exceptions.base_exception.ApiErrorException;
-import com.api.cv.exceptions.RessourceDbNotFoundException;
-import com.api.cv.services.user.UserService;
-import org.mapstruct.*;
-
 import com.api.cv.dto.offer.OfferRequestDto;
 import com.api.cv.dto.offer.OfferResponseDto;
 import com.api.cv.dto.offer.OfferUpdateRequestDto;
+import com.api.cv.entities.User;
 import com.api.cv.entities.offer.Offer;
-import com.api.cv.mappers.offer.helpers.OfferMapperHelper;
+import com.api.cv.exceptions.RessourceDbNotFoundException;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
+import com.api.cv.services.user.UserService;
+import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 
 @Mapper(
@@ -30,7 +28,7 @@ public abstract class OfferMapper {
 	@Mapping(source = "statusCode", target = "offerStatus")
 	@Mapping(source = "contractTypeCode", target = "contractType" )
 	@Mapping(target = "createdUser", expression = "java(getUserFromService())")
-	public abstract Offer DtoToEntity(OfferRequestDto offerDto) throws ApiErrorException, RessourceDbNotFoundException;
+	public abstract Offer DtoToEntity(OfferRequestDto offerDto) throws ApiErrorException;
 
 	@Mapping(target = "createdUser", source = "createdUser")
 	@Mapping(target = "offerStatus", source = "offerStatus")

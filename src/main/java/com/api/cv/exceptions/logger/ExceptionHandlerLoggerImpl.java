@@ -40,7 +40,7 @@ public class ExceptionHandlerLoggerImpl implements ExceptionHandlerLogger {
             // Ne pas tracer la stacktrace
 
             ErrorCode errorCode = ((ApiErrorException) th).getErrorCode();
-            String description = ((ApiErrorException) th).getMessage();
+            String description = th.getMessage();
             if(errorCode != null && description != null) {
                 messageToLogBuilder.append("A functional exception occured. error code : ").append(errorCode).append(" , error description : ").append(description);
             }

@@ -17,7 +17,8 @@ public enum ErrorCode {
     AK005("EMAIL ALREADY EXISTS in Keycloak"),
     AK006("USERNAME OR PASSWORD INCORRECT"),
     AK007("Role Not found in keycloak"),
-    AK008("error while getting Roles"),;
+    AK008("error while getting Roles"),
+    AR001("Role Not found");
 
     private final String value;
 

@@ -1,14 +1,15 @@
-package com.api.cv.dto.offer;
+package com.api.cv.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data	
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContractTypeDto {
+public class ReferentielDto {
 
     private String code;
     private String libelle;
+
 }

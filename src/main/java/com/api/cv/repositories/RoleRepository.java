@@ -1,13 +1,13 @@
 package com.api.cv.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.api.cv.entities.Role;
 import org.springframework.stereotype.Repository;
 
-import com.api.cv.entities.Role;
+import java.util.Optional;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long>{
+public interface RoleRepository extends BaseRepository<Role, Long>{
 
-    Role findByLabel(String Label);
+    Optional<Role> findByLabel(String Label);
 
 }

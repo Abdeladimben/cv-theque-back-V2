@@ -1,10 +1,10 @@
 package com.api.cv.exceptions;
 
-import java.util.Arrays;
-import java.util.Date;
-
 import com.api.cv.enums.ErrorCode;
 import lombok.Data;
+
+import java.util.Arrays;
+import java.util.Date;
 
 @Data
 public class ApiError {

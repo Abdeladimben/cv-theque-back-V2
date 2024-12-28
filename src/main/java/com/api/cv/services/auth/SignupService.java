@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class SignupService implements ISignupService {
-    
+
     private final IKeycloakSignUpService keycloakSignUpService;
 
     private final UserRepository userRepository;
@@ -33,8 +33,8 @@ public class SignupService implements ISignupService {
 
     private final UserRoleRepository userRoleRepository;
 
-	@Override
-	public void createUser(RegisterRequestDto registerRequestDto) throws ApiErrorException {
+    @Override
+    public void createUser(RegisterRequestDto registerRequestDto) throws ApiErrorException {
         Optional<User> userOptional = userRepository.findByUserName(registerRequestDto.getUsername());
         if (userOptional.isPresent()) {
             throw new RessourceAlreadyExistException(ErrorCode.AU001);
@@ -57,7 +57,7 @@ public class SignupService implements ISignupService {
     private void saveUserRoles(User user,List<String> roles) {
         List<UserRole> userRoles = new ArrayList<>();
         for (String label : roles) {
-            Role role = roleRepository.findByLabel(label);
+            Role role = roleRepository.findByLabel(label).get();
             userRoles.add(new UserRole(user,role));
         }
         userRoleRepository.saveAll(userRoles);

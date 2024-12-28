@@ -2,6 +2,8 @@ package com.api.cv.entities.offer;
 
 import java.io.Serial;
 
+import com.api.cv.entities.referentiel.ContractType;
+import com.api.cv.entities.referentiel.OfferStatus;
 import org.hibernate.annotations.Where;
 
 import com.api.cv.entities.BaseModel;
