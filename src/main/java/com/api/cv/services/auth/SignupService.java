@@ -19,6 +19,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.api.cv.consuming.keycloak.services.signup.IKeycloakSignUpService;
+import com.api.cv.entities.Role;
+import com.api.cv.entities.UserRole;
+import com.api.cv.helpers.Utils;
+import com.api.cv.repositories.RoleRepository;
+import com.api.cv.repositories.UserRoleRepository;
+import org.springframework.stereotype.Service;
+
+import com.api.cv.dto.auth.RegisterRequestDto;
+import com.api.cv.entities.User;
+import com.api.cv.enums.ErrorCode;
+import com.api.cv.exceptions.base_exception.ApiErrorException;
+import com.api.cv.exceptions.RessourceAlreadyExistException;
+import com.api.cv.repositories.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class SignupService implements ISignupService {
@@ -39,27 +56,24 @@ public class SignupService implements ISignupService {
         }
         List<Role> listRoles = getRoles(registerRequestDto.getRoles());
         String keycloakUserId = keycloakSignUpService.Signup(registerRequestDto);
-        saveUserWithRoles(keycloakUserId, registerRequestDto,listRoles);
-    }
-
-    private List<Role> getRoles(List<String> roles) throws RessourceDbNotFoundException {
-        List<Role> listRoles = new ArrayList<>();
-        for (String label : roles) {
-            Role role = roleRepository.findByLabel(label)
-                    .orElseThrow(()-> new RessourceDbNotFoundException(ErrorCode.AR001));
-            listRoles.add(role);
+        User user = saveUserWithRoles(keycloakUserId, registerRequestDto);
+        if(Utils.isNotNullAndNotEmpty(registerRequestDto.getRoles())) {
+            saveUserRoles(user, registerRequestDto.getRoles());
         }
-        return listRoles;
     }
 
-    private void saveUserWithRoles(String keycloakUserId , RegisterRequestDto registerRequestDto , List<Role> listRoles){
+    private User saveUserWithRoles(String keycloakUserId , RegisterRequestDto registerRequestDto){
         User user = new User();
         user.setUserName(registerRequestDto.getUsername());
         user.setEmail(registerRequestDto.getEmail());
         user.setKeycloakId(keycloakUserId);
-        userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    private void saveUserRoles(User user,List<String> roles) {
         List<UserRole> userRoles = new ArrayList<>();
-        for (Role role : listRoles) {
+        for (String label : roles) {
+            Role role = roleRepository.findByLabel(label);
             userRoles.add(new UserRole(user,role));
         }
         userRoleRepository.saveAll(userRoles);
