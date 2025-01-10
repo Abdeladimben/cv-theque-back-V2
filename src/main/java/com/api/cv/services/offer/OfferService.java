@@ -83,9 +83,6 @@ public class OfferService implements IOfferService {
         offerRepository.save(offer);
     }
 
-    
-    
-    
     @Override
     public PaginationResultDto<OfferResponseDto> searchOffers(OfferSearchRequestDto offerSearchRequestDto, int page, int size) {
         // Create Pageable object for pagination
@@ -103,7 +100,7 @@ public class OfferService implements IOfferService {
             .map(offerMapper::EntityToDto)
             .toList();
 
-        // Create and return PaginationResultDto
+       
         return new PaginationResultDto<>(
             offerResponseDtos,                        // List of DTOs
             offers.getTotalPages(),                   // Total number of pages
@@ -113,22 +110,6 @@ public class OfferService implements IOfferService {
         );
     }
     
-    /*
-	@Override
-	public Page<OfferResponseDto> getFilteredOffers(String title, String ville, Double remuneration,
-			Integer dureeContrat, Pageable pageable) {
-		 Page<Offer> offers = offerRepository.findFilteredOffers(title, ville, remuneration, dureeContrat, pageable);
-	        return offers.map(offerMapper::EntityToDto);
-	}
-    
-    
-    */
-    
-    
-    
-    
-    
-    
-    
+  
     
 }
