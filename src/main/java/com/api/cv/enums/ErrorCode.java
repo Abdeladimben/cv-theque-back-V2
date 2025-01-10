@@ -19,6 +19,7 @@ public enum ErrorCode {
     AK007("Role Not found in keycloak"),
     AK008("error while getting Roles"),
     AR001("Role Not found");
+    
 
     private final String value;
 
