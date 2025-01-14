@@ -16,7 +16,7 @@ import lombok.Data;
 public class UserKeycloakInfoResponse {
 
     @Schema(description = "The username of the user", example = "john_doe")
-    
+
     private final String username;
     
     @Schema(description = "The email address of the user", example = "john.doe@example.com")

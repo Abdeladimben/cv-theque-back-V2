@@ -22,6 +22,9 @@ public class OfferResponseDto {
 	@Schema(description = "Description of the offer", example = "Looking for a skilled Java developer", required = true)	
     private String description;
 	
+	@Schema(description = "City where the job is located", example = "Casablanca", required = true)
+	private String ville;
+	
 	@Schema(description = " the user of the offer",  required = true)	
     private UserDto createdUser; 
 

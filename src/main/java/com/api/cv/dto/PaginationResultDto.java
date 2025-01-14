@@ -17,4 +17,5 @@ public class PaginationResultDto<T> {
     private long totalItems;
     private int page;
     private int size;
+    
 }

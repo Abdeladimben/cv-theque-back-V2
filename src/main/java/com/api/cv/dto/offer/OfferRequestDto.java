@@ -29,7 +29,7 @@ public class OfferRequestDto {
     @Schema(description = "Duration of the contract in months", example = "12", required = true)
     private int dureeContrat;
 
-    @Schema(description = "Code of the offer status (e.g., 1 for Pending, 2 for Active)", example = "1", required = true)
+    @Schema(description = "Code of the offer status (e.g., 1 for Pending, 2 for Active)", example = "DRAFT", required = true)
     private String statusCode;
 
     @Schema(description = "Code of the contract type (e.g., 1 for Full-Time, 2 for Part-Time)", example = "1", required = true)
