@@ -4,10 +4,12 @@ import com.api.cv.consuming.keycloak.model.KeycloakRole;
 import com.api.cv.consuming.keycloak.services.KeycloakService;
 import com.api.cv.entities.Role;
 import com.api.cv.entities.referentiel.ContractType;
+import com.api.cv.entities.referentiel.DocumentType;
 import com.api.cv.entities.referentiel.OfferStatus;
 import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.repositories.RoleRepository;
 import com.api.cv.repositories.referentiel.ContractTypeRepository;
+import com.api.cv.repositories.referentiel.DocumentTypeRepository;
 import com.api.cv.repositories.referentiel.OfferStatusRepository;
 
 import jakarta.annotation.PostConstruct;
@@ -31,7 +33,7 @@ public class DbInit {
     final private KeycloakService keycloakService;
     private final OfferStatusRepository offerStatusRepository;
     private final ContractTypeRepository contractTypeRepository;
-    
+    private final DocumentTypeRepository documentTypeRepository;
 
     @PostConstruct
     private void postConstruct() throws ApiErrorException {
@@ -51,6 +53,14 @@ public class DbInit {
             log.info("************************************************************** START GETTING CONTRACT TYPES **************************************************************");
             saveContractType();
             log.info("************************************************************** END GETTING CONTRACT TYPES **************************************************************");
+        }
+        
+        if(documentTypeRepository.count()==0) {
+        	
+        	log.info("************************************************************** START GETTING DOCUMENT TYPES **************************************************************");
+            saveDocumentTypes();
+            log.info("************************************************************** END GETTING DOCUMENT TYPES **************************************************************");
+        
         }
         
     }
@@ -92,40 +102,56 @@ public class DbInit {
         roleRepository.saveAll(roles);
     }
 
+    
+    private void saveDocumentTypes() {
+    	List<DocumentType>types=new ArrayList<>();
+    	
+    	DocumentType cv=new DocumentType();
+    	cv.setName("CV");
+    	cv.setCode("CV");
+    	types.add(cv);
+    	//
+    	DocumentType letter=new DocumentType();
+    	letter.setName("letter");
+    	letter.setCode("letter");
+    	types.add(letter);
+    	//
+    	DocumentType image=new DocumentType();
+    	image.setName("image");
+    	image.setCode("image");
+    	types.add(image);
+    	
+    	documentTypeRepository.saveAll(types);
+        log.info("Document Types  initialized successfully");
+
+    	
+    }
     private void saveOfferStatus() throws ApiErrorException {
     	
         List<OfferStatus> statuses = new ArrayList<>();
         
         // Create DRAFT status
         OfferStatus draft = new OfferStatus();
-        draft.setCode("DRAFT");
-        draft.setUuid(UUID.randomUUID().toString());
-        draft.setLibelle("Draft");
-        draft.setDelete(false);
+        draft.setCode("DRAFT");  
+        draft.setLibelle("Draft");       
         statuses.add(draft);
         
         // Create PUBLISHED status
         OfferStatus published = new OfferStatus();
-        published.setCode("PUBLISHED");
-        published.setUuid(UUID.randomUUID().toString());
+        published.setCode("PUBLISHED");    
         published.setLibelle("Published");
-        published.setDelete(false);
         statuses.add(published);
         
         // Create CLOSED status
         OfferStatus closed = new OfferStatus();
-        closed.setCode("CLOSED");
-        closed.setUuid(UUID.randomUUID().toString());
-        closed.setLibelle("Closed");
-        closed.setDelete(false);
+        closed.setCode("CLOSED"); 
+        closed.setLibelle("Closed");  
         statuses.add(closed);
         
         // Create ARCHIVED status
         OfferStatus archived = new OfferStatus();
         archived.setCode("ARCHIVED");
-        archived.setUuid(UUID.randomUUID().toString());
         archived.setLibelle("Archived");
-        archived.setDelete(false);
         statuses.add(archived);
         offerStatusRepository.saveAll(statuses);  
         
