@@ -14,11 +14,12 @@ public interface IDocumentService {
 	
 	
 	
-	 String upload(MultipartFile file,String DocumentTypeCode) throws IOException, ApiErrorException;
+	 DocumentDto upload(MultipartFile file,String DocumentTypeCode) throws IOException, ApiErrorException;
 	 byte[]downloadFile(String uuid);
 	 
 	 List<DocumentDto> getDocsByUser() throws ApiErrorException;
 	 
+	 DocumentDto getDocByUuid(String uuid) throws RessourceDbNotFoundException;
 	void delete(String uuid) throws RessourceDbNotFoundException;
 	
 	//public List<DocumentDto> getAllDocuments() throws ApiErrorException;

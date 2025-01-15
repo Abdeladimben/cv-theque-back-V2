@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("${endpoint.prefix}Apply")
 public class ApplyController {
 	
-	private final IApplyService ApplyService;
+	private final IApplyService applyService;
 	
 	@Operation(summary="Apply endpoint",description="User apply to an offer")
 	@ApiResponse(responseCode = "200",description="User Applied successfully")
@@ -30,7 +30,7 @@ public class ApplyController {
 	@ApiResponse(responseCode = "500", description = "Internal server error")
 	@PostMapping()
     public ResponseEntity<Void> Apply(@RequestBody ApplyDto applyDto) throws ApiErrorException {
-		ApplyService.Apply(applyDto);
+		applyService.Apply(applyDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

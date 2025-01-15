@@ -57,10 +57,10 @@ public class DocumentService implements IDocumentService{
 		documentRepository.save(doc);
 	}
 	@Override
-	public String upload(MultipartFile file,String DocumentTypeCode) throws IOException, ApiErrorException {
+	public DocumentDto upload(MultipartFile file,String DocumentTypeCode) throws IOException, ApiErrorException {
 		Document doc=documentRepository.save(Document.builder()
 				.nomDocument(file.getOriginalFilename())
-				.Extension(file.getContentType())
+				.extension(file.getContentType())
 				.taille(file.getSize())
 				.data(DocumentUtils.compressFile(file.getBytes()))
 				.createdUser(getUserFromService())
@@ -68,7 +68,9 @@ public class DocumentService implements IDocumentService{
 				.build());
 		
 		if(doc!=null) {
-			return "file uploaded successfuly  "+file.getOriginalFilename();
+			DocumentDto dto=DocumentMapper.INSTANCE.entityToDto(doc);
+			dto.setData(null);
+			return dto;
 
 		}
 		return null;
@@ -89,6 +91,14 @@ public class DocumentService implements IDocumentService{
 		
 		List<Document> documents=documentRepository.findByCreatedUser(getUserFromService());
 		return DocumentMapper.INSTANCE.entitiesToDtos(documents);
+	}
+	@Override
+	public DocumentDto getDocByUuid(String uuid) throws RessourceDbNotFoundException {
+		
+		Document doc=documentRepository.findByUuid(uuid)
+				.orElseThrow(() -> new RessourceDbNotFoundException(ErrorCode.A400));
+		
+		return DocumentMapper.INSTANCE.entityToDto(doc);
 	}
 	
 	

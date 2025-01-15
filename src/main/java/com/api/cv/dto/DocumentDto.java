@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "DocumentDto", description = "Request payload for upload a document")
+@Schema(name = "DocumentDto", description = "Response payload for upload a document")
 
 public class DocumentDto {
 	

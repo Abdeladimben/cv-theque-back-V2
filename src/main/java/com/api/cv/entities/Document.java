@@ -29,7 +29,7 @@ public class Document extends BaseModel{
 	@Column(name="nom_document")
 	private String nomDocument;
 	@Column(name="extension")
-	private String Extension;
+	private String extension;
 	@Column(name="taille")
 	private Long taille;
 	

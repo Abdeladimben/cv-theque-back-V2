@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.cv.dto.DocumentDto;
+import com.api.cv.enums.ErrorCode;
 import com.api.cv.exceptions.RessourceDbNotFoundException;
 import com.api.cv.exceptions.base_exception.ApiErrorException;
 import com.api.cv.services.document.IDocumentService;
@@ -39,7 +40,7 @@ import lombok.RequiredArgsConstructor;
 public class DocumentController {
 	
 	
-	private final IDocumentService iDocumentService;
+	private final IDocumentService documentService;
 
 	@Operation(summary = "Delete document", description = "Delete document by Uuid")
     @ApiResponse(responseCode = "201", description = "Document Deleted successfully")
@@ -47,7 +48,7 @@ public class DocumentController {
     @ApiResponse(responseCode = "500", description = "Internal server error")
 	@DeleteMapping("{uuid}")
 	public ResponseEntity<Void> delete(@PathVariable String uuid) throws RessourceDbNotFoundException {
-		iDocumentService.delete(uuid);
+		documentService.delete(uuid);
 		return ResponseEntity.noContent().build();
 	
 	}
@@ -58,11 +59,14 @@ public class DocumentController {
     @ApiResponse(responseCode = "500", description = "Internal server error")
 	@PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
-	public ResponseEntity<?> uploadFile(@RequestParam MultipartFile file,@RequestParam String documentTypeCode) throws IOException, ApiErrorException{
+	public ResponseEntity<DocumentDto> uploadFile(@RequestParam MultipartFile file,@RequestParam String documentTypeCode) throws IOException, ApiErrorException{
 		
-		String ulpoad=iDocumentService.upload(file,documentTypeCode);
+		  if (file.isEmpty()) {
+		        throw new ApiErrorException(ErrorCode.AD001);
+		    }
+		DocumentDto  ulpoad=documentService.upload(file,documentTypeCode);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(ulpoad);
+		return ResponseEntity.ok(ulpoad);
 		
 	}
 	
@@ -71,12 +75,13 @@ public class DocumentController {
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
 	@GetMapping("/download/{uuid}")
-	    public ResponseEntity<byte[]> downloadFile(@PathVariable String uuid) {
-	        
-	        byte[] doc = iDocumentService.downloadFile(uuid);
-	        String filename = "document.pdf"; 
+	    public ResponseEntity<byte[]> downloadFile(@PathVariable String uuid) throws RessourceDbNotFoundException {
+	        DocumentDto dto=documentService.getDocByUuid(uuid);
+	        String mimeType=dto.getExtension();
+	        String filename = dto.getNomDocument(); 
+	        byte[] doc = documentService.downloadFile(uuid);
 	        HttpHeaders headers = new HttpHeaders();
-	        headers.setContentType(MediaType.APPLICATION_PDF); 
+	        headers.setContentType(MediaType.parseMediaType(mimeType)); 
 	        headers.setContentDispositionFormData("attachment", filename); //
 	        return new ResponseEntity<>(doc, headers, HttpStatus.OK);
 	    }
@@ -88,7 +93,7 @@ public class DocumentController {
 	    @GetMapping("/get/all")
 	    public ResponseEntity<List<DocumentDto>> getDocsByUser() throws ApiErrorException  {
 
-	        return ResponseEntity.ok(iDocumentService.getDocsByUser());
+	        return ResponseEntity.ok(documentService.getDocsByUser());
 	    }
 	    
 	    

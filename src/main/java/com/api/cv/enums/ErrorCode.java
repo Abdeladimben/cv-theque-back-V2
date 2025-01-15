@@ -18,8 +18,8 @@ public enum ErrorCode {
     AK006("USERNAME OR PASSWORD INCORRECT"),
     AK007("Role Not found in keycloak"),
     AK008("error while getting Roles"),
-    AR001("Role Not found");
-    
+    AR001("Role Not found"),
+    AD001("Document is required and cannot be empty.");
 
     private final String value;
 

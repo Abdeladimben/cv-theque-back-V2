@@ -31,5 +31,5 @@ public class Apply extends BaseModelReferentiel {
     private Offer offer;
 
 	@Column(name="status")
-	private String Status;
+	private String status;
 }
